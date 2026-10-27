@@ -33,6 +33,7 @@ Todo prompt segue seis blocos. Assim ele fica reproduzível e fácil de citar:
 | ID | Data | Sprint | Item do backlog | Título | Autor |
 |---|---|---|---|---|---|
 | [P01](P01-build-web.md) | 27/10/2026 | S0 | US-06, US-08 | Build web com pygbag | Rafael |
+| [P02](P02-github-pages.md) | 27/10/2026 | S0 | US-06, US-07, T-02 | Repositório e publicação no GitHub Pages | Rafael |
 
 ## Sugestão de texto para o TCC (Metodologia)
 

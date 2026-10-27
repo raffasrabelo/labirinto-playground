@@ -66,6 +66,18 @@ python -m pygbag --build --title "Labirinto Playground" app
 
 O resultado fica em `app/build/web/` (`index.html`, `app.apk`, `favicon.png`).
 
+## Publicação automática (GitHub Pages)
+
+A cada `push` na branch `main`, o GitHub Actions ([deploy.yml](.github/workflows/deploy.yml))
+roda os testes, gera o build web e publica no GitHub Pages. Se um teste falhar, nada é publicado.
+
+Configuração única (uma vez por repositório):
+1. O repositório precisa ser **público** (o Pages é gratuito só para repositórios públicos).
+2. Em **Settings → Pages → Build and deployment → Source**, escolha **GitHub Actions**.
+3. Faça o push; o andamento aparece na aba **Actions**, e o link em **Settings → Pages**.
+
+Endereço do link: `https://<usuario>.github.io/<repositorio>/`
+
 ## Documentação
 
 | Documento | Conteúdo |

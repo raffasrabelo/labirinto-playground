@@ -43,6 +43,7 @@
 
 ## Prompts utilizados
 - [P01 · Build web com pygbag](../prompts/P01-build-web.md)
+- [P02 · Repositório e publicação no GitHub Pages](../prompts/P02-github-pages.md)
 
 ## Sprint Review · roteiro da demonstração (≈ 12 min)
 

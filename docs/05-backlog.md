@@ -16,7 +16,7 @@ Status: ✅ pronto · 🔄 em andamento · ⏳ a fazer · ✂️ cortado.
 | ID | História de usuário | Prior. | Sprint | Status |
 |---|---|---|---|---|
 | US-06 | Como aluno, quero abrir a plataforma por um link, sem instalar nada | Must | S0/S1 | 🔄 roda no navegador (local); falta o link público |
-| US-07 | Como equipe, queremos publicar automaticamente a cada sprint para os stakeholders testarem | Should | S1 | ⏳ |
+| US-07 | Como equipe, queremos publicar automaticamente a cada sprint para os stakeholders testarem | Should | S0 | 🔄 workflow pronto (P02); aguardando o primeiro push |
 | US-08 | Como equipe, queremos medir o FPS no navegador e ajustar os limites de tamanho | Must | S0 | ✅ 61×61 cabe em 60 fps (P01) |
 
 ## Épico E3 · Dijkstra
@@ -56,5 +56,5 @@ Status: ✅ pronto · 🔄 em andamento · ⏳ a fazer · ✂️ cortado.
 | ID | Item | Sprint | Status |
 |---|---|---|---|
 | T-01 | Arquitetura de geradores de eventos + testes automatizados | S0 | ✅ |
-| T-02 | Repositório GitHub + tags por sprint | S1 | ⏳ |
+| T-02 | Repositório GitHub + tags por sprint | S0 | 🔄 repositório local criado; falta o remoto |
 | T-03 | Redesenhar só as células alteradas (se o FPS web for baixo) | S1 | ⏳ |
