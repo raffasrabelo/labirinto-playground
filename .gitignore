@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+app/build/
+
+# Texto do TCC (Word) fica no OneDrive, fora do repositório público
+*.docx
+~$*.docx
+
+# Configuração local do editor/assistente
+.claude/
