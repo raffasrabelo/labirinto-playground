@@ -8,6 +8,9 @@ Autores: Arielce José Pereira Junior e Rafael da Silva Rabelo · Orientador: Pr
 
 **Versão atual:** v0.1 (Sprint 0): Dijkstra e Backtracking, no desktop e no navegador.
 
+### ▶ [Abrir no navegador](https://raffasrabelo.github.io/labirinto-playground/)
+`https://raffasrabelo.github.io/labirinto-playground/` (leva alguns segundos para carregar; recomendado em computador)
+
 ![Protótipo v0.1](docs/img/v0.1-dijkstra-concluido.png)
 
 ## Como executar (desktop)

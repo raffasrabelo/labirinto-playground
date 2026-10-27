@@ -19,12 +19,15 @@
 | US-05 | Métricas, legenda e texto explicativo por algoritmo | ✅ |
 | US-09 | Distância acumulada nas células (Dijkstra) | ✅ |
 | — | Dijkstra e Backtracking funcionando (versão inicial) | ✅ |
-| US-06 / US-08 | **Versão web (pygbag)** rodando no navegador + medição de desempenho (adiantado da S1, ver P01) | ✅ local · link público pendente |
+| US-06 / US-08 | **Versão web (pygbag)** rodando no navegador + medição de desempenho (adiantado da S1, ver P01) | ✅ |
+| US-07 / T-02 | Repositório público + publicação automática no GitHub Pages (P02) | ✅ |
 | — | Documentação: visão, requisitos, arquitetura, processo, cronograma, backlog, prompts | ✅ |
 
 ## Entregas (incremento v0.1)
 - Aplicação desktop em `app/` (`python main.py`).
-- **Mesma aplicação rodando no navegador** (`python -m pygbag app` → http://localhost:8000), sem nenhuma alteração de código.
+- **Mesma aplicação rodando no navegador**, sem nenhuma alteração de código:
+  **<https://raffasrabelo.github.io/labirinto-playground/>** (publicada automaticamente a cada push).
+- Código-fonte: <https://github.com/raffasrabelo/labirinto-playground>
 - Documentação em `docs/`.
 - Capturas de tela em `docs/img/`.
 
@@ -61,6 +64,7 @@
 4. **Como foi construído (2 min):** diagrama de camadas (`docs/02-arquitetura.md`), algoritmos como geradores e testes automatizados.
    Mostrar o **mesmo app no navegador** e citar a medição: 61×61 a 1000 passos/s em cerca de 10 ms por quadro, dentro dos 60 fps.
    → *"O principal risco técnico do projeto, rodar Pygame na web, já foi eliminado."*
+   Enviar o link aos stakeholders para que testem durante a semana: o feedback assíncrono também entra na tabela abaixo.
 5. **Cronograma (1 min):** `docs/04-cronograma.md` e riscos.
 6. **Perguntas (abaixo).**
 

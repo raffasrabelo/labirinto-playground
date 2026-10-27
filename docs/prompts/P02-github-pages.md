@@ -39,7 +39,15 @@ flowchart LR
 - YAML do workflow lido sem erros (jobs `test`, `build`, `deploy`).
 - Testes executados em ambiente limpo **sem pygame**, como no job `test`: 6/6 ✅.
 - Build pygbag do zero: ✅ (`index.html`, `app.apk`, `favicon.png`).
-- **Não validado ainda:** a execução real no GitHub Actions. Isso só acontece após o primeiro push.
+## Publicação (com autorização explícita do autor)
+- Repositório público criado: <https://github.com/raffasrabelo/labirinto-playground>
+- GitHub Pages ativado com origem **GitHub Actions** (via API, antes do primeiro push).
+- Primeira execução do workflow (run 40598328628): `test` ✅ 8s · `build` ✅ 9s · `deploy` ✅ 10s.
+- Link público testado: a plataforma carrega, executa e reproduz os resultados do desktop
+  (Dijkstra, semente 42, 21×21: custo 120, 56 passos). O erro 404 do pygame-ce visto em
+  localhost (P01) não ocorre no Pages, como previsto.
+- Avisos não bloqueantes do GitHub: as ações `checkout@v4`, `setup-python@v5`, `upload-pages-artifact@v3`
+  e `deploy-pages@v4` usam Node.js 20, que está descontinuado. Atualizar as versões depois (item T-04).
 
 ## Revisão da equipe
 - Aceito:
@@ -48,4 +56,5 @@ flowchart LR
 
 ## Evidências
 - Commit: `feat: protótipo v0.1 do Labirinto Playground (Sprint 0)`
-- Link público: *(preencher após a primeira publicação)*
+- Link público: <https://raffasrabelo.github.io/labirinto-playground/>
+- Execução: <https://github.com/raffasrabelo/labirinto-playground/actions/runs/40598328628>
