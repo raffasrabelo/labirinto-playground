@@ -1,19 +1,22 @@
 """Registro dos algoritmos disponíveis na plataforma.
 
 Para adicionar um algoritmo novo basta criar o gerador e registrá-lo aqui.
+`params` lista os parâmetros da sessão repassados ao gerador.
 """
 from dataclasses import dataclass
 
 from .backtracking import backtracking
 from .dijkstra import dijkstra
+from .qlearning import qlearning
 
 
 @dataclass(frozen=True)
 class AlgorithmInfo:
     name: str
-    run: object          # função geradora (grid) -> Event, ou None
+    run: object          # função geradora (grid, **params) -> Event
     description: str
     available: bool = True
+    params: tuple = ()
 
 
 ALGORITHMS = {
@@ -36,10 +39,14 @@ ALGORITHMS = {
     ),
     "qlearning": AlgorithmInfo(
         "Q-Learning",
-        None,
-        "Previsto para a Sprint 3: um agente aprende por tentativa e erro, "
-        "recebendo recompensas, com parâmetros alfa (aprendizado), gama "
-        "(desconto) e épsilon (exploração).",
-        available=False,
+        qlearning,
+        "O agente não conhece o labirinto: aprende por tentativa e erro. A cada "
+        "passo recebe uma recompensa (−1 por célula, −5 na lama, penalidade ao "
+        "bater na parede, bônus ao chegar) e atualiza a tabela Q. A cor das "
+        "células mostra o valor aprendido e as setas, a melhor ação em cada "
+        "lugar. No fim, ele percorre o labirinto seguindo o que aprendeu. "
+        "Experimente baixar o gama para 0,95 em uma grade 21 × 21.",
+        params=("alpha", "gamma", "epsilon", "decay", "episodes", "goal_reward",
+                "wall_penalty", "seed"),
     ),
 }

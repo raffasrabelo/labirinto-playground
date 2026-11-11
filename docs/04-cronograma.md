@@ -32,6 +32,36 @@ gantt
     Entrega final :milestone, 2026-11-30, 0d
 ```
 
+## Linha do tempo de marcos e decisões
+
+O Gantt mostra *quando* cada coisa está planejada; a linha do tempo registra *o que de fato
+aconteceu*. Ela serve para a narrativa do capítulo de Resultados. **Atualize ao fim de cada
+sprint** (os itens das sprints futuras são previsões).
+
+```mermaid
+timeline
+    title Labirinto Playground: marcos e decisões
+    section Sprint 0
+        27/10 : Planejamento, requisitos e arquitetura
+              : v0.1 com Dijkstra e Backtracking (interface em Pygame)
+              : P01 versão web com pygbag
+              : P02 repositório público e GitHub Pages
+              : ADR-02 interface em HTML/CSS (v0.2)
+        28/10 : Sprint Review 0
+    section Sprint 1 (previsto)
+        04/11 : Pseudocódigo destacado + fila de prioridade visível
+    section Sprint 2 (previsto)
+        11/11 : Backtracking com pilha de chamadas visível
+    section Sprint 3
+        11/11 : v0.3 com Q-Learning treinável e visualizável
+              : γ padrão 0,995 escolhido por experimento
+        12/11 : uso em aula pelo orientador (caso de uso)
+    section Sprint 4 (previsto)
+        25/11 : Validação com usuários e polimento
+    section Sprint 5 (previsto)
+        30/11 : v1.0 e entrega final
+```
+
 ## Sprints
 
 | Sprint | Período | Objetivo (Sprint Goal) | Incremento demonstrável | Escrita do TCC |
@@ -68,3 +98,5 @@ modo exaustivo do Backtracking → gráfico de recompensa do Q-Learning → tuto
 |---|---|---|
 | 27/10/2026 | Versão inicial | Planejamento da Sprint 0 |
 | 27/10/2026 | Build web (US-06/US-08) adiantado da S1 para a S0 | Equipe, para mostrar na Review de 28/10; a S1 ganha folga para o pseudocódigo |
+| 27/10/2026 | Interface refeita em HTML/CSS, com o Pygame só no labirinto (ADR-02) | Equipe, após avaliar o design da v0.1; feito ainda na S0 |
+| 11/11/2026 | Q-Learning (S3) entregue em 11/11, antes do fim da sprint (18/11) | Orientador, para usar a plataforma em aula em 12/11 e documentar o caso no TCC |

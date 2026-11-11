@@ -37,11 +37,12 @@ Status: ✅ pronto · 🔄 em andamento · ⏳ a fazer · ✂️ cortado.
 ## Épico E5 · Q-Learning
 | ID | História de usuário | Prior. | Sprint | Status |
 |---|---|---|---|---|
-| US-16 | Como aluno, quero treinar um agente ajustando α, γ, ε e nº de episódios | Must | S3 | ⏳ |
-| US-17 | Como aluno, quero configurar as recompensas (objetivo, passo, lama, parede) | Should | S3 | ⏳ |
-| US-18 | Como aluno, quero ver um mapa de calor do valor aprendido e setas da política | Must | S3 | ⏳ |
-| US-19 | Como aluno, quero ver a curva de recompensa por episódio | Should | S3 | ⏳ |
-| US-20 | Como aluno, quero assistir ao agente treinado percorrer o labirinto | Must | S3 | ⏳ |
+| US-16 | Como aluno, quero treinar um agente ajustando α, γ, ε e nº de episódios | Must | S3 | ✅ v0.3 (P04) |
+| US-17 | Como aluno, quero configurar as recompensas (objetivo, passo, lama, parede) | Should | S3 | ✅ objetivo e parede configuráveis; passo e lama seguem o custo das células |
+| US-18 | Como aluno, quero ver um mapa de calor do valor aprendido e setas da política | Must | S3 | ✅ |
+| US-19 | Como aluno, quero ver a curva de recompensa por episódio | Should | S3 | ✅ com média móvel |
+| US-20 | Como aluno, quero assistir ao agente treinado percorrer o labirinto | Must | S3 | ✅ percurso pela política aprendida ao fim do treino |
+| US-26 | Como professor, quero um roteiro de aula com experimentos verificados | Should | S3 | ✅ [09-roteiro-aula-qlearning.md](09-roteiro-aula-qlearning.md) |
 
 ## Épico E6 · Validação e acabamento
 | ID | História de usuário | Prior. | Sprint | Status |
@@ -58,4 +59,6 @@ Status: ✅ pronto · 🔄 em andamento · ⏳ a fazer · ✂️ cortado.
 | T-01 | Arquitetura de geradores de eventos + testes automatizados | S0 | ✅ |
 | T-02 | Repositório GitHub + tags por sprint | S0 | ✅ [repositório](https://github.com/raffasrabelo/labirinto-playground); tag `sprint-0` após a Review |
 | T-04 | Atualizar as ações do workflow (avisos de Node.js 20 descontinuado) | S1 | ⏳ |
+| T-05 | Interface híbrida: controles em HTML/CSS/JS, labirinto em Pygame, ponte JSON (ADR-02, P03) | S0 | ✅ |
+| T-06 | Capturas de tela da v0.2 em alta resolução para o TCC e o README | S0 | ✅ 4 capturas + comparativo (docs/img) |
 | T-03 | Redesenhar só as células alteradas (se o FPS web for baixo) | S1 | ⏳ |

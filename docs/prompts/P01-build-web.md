@@ -14,7 +14,7 @@
 Sim, tente o build web com pygbag agora (prompt P01) para eu levar o link na review de amanhã.
 ```
 
-O pedido curto remete ao P01 do [catálogo](catalogo.md), que contém papel, contexto, tarefa,
+O pedido curto remete ao C01 do [catálogo](catalogo.md), que contém papel, contexto, tarefa,
 restrições e critérios de aceite completos.
 
 ## Resultado obtido

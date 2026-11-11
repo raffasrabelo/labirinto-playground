@@ -11,3 +11,9 @@ app/build/
 
 # Configuração local do editor/assistente
 .claude/
+
+# Template gerado por tools/build_web.py
+web/build/
+
+# Áudios gerados (grandes demais para o repositório)
+*.wav

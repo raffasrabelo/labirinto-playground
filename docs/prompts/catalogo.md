@@ -4,6 +4,15 @@ Prompts prontos para uso, já no formato padrão. Ajuste o bloco **CONTEXTO** co
 feedback recebido na Review anterior antes de enviar. Depois de usar, registre o
 resultado em um arquivo `PXX-*.md` (ver [README](README.md)).
 
+> **Numeração:** `C01`, `C02`... identificam os prompts *planejados* neste catálogo.
+> Os prompts *executados* recebem o próximo número livre da série `P` (P01, P02...),
+> na ordem em que realmente aconteceram, e citam o `C` de origem quando houver.
+>
+> **Atualização (27/10, ADR-02):** a interface agora é HTML/CSS e o Pygame desenha só o
+> labirinto. Nos prompts abaixo, "painel", "slider" e "gráfico" significam elementos em
+> `web/src/` alimentados pelo estado enviado pelo Python. Desenhos sobre o labirinto
+> (mapa de calor, setas) continuam em `app/ui/board.py`.
+
 > Cabeçalho comum: todo prompt começa citando `docs/02-arquitetura.md` e
 > `docs/05-backlog.md`, para a IA respeitar as decisões já tomadas.
 
@@ -11,7 +20,7 @@ resultado em um arquivo `PXX-*.md` (ver [README](README.md)).
 
 ## Sprint 1 · Web + Dijkstra completo
 
-### P01 · Build web com pygbag (US-06, US-08) ← primeira tarefa da S1, maior risco técnico
+### C01 · Build web com pygbag (US-06, US-08) ← primeira tarefa da S1, maior risco técnico
 ```text
 PAPEL: Atue como desenvolvedor sênior especialista em Python, pygame-ce e pygbag.
 CONTEXTO: O app em app/ roda no desktop (python main.py). Leia docs/02-arquitetura.md.
@@ -25,7 +34,7 @@ tabela de FPS documentada; instruções de build no README.
 FORMATO DA SAÍDA: código alterado + seção "Versão web" no README + tabela de FPS.
 ```
 
-### P02 · Publicação no GitHub Pages (US-07, T-02)
+### C02 · Publicação no GitHub Pages (US-07, T-02)
 ```text
 PAPEL: Atue como engenheiro DevOps.
 CONTEXTO: Repositório GitHub <url>. Build pygbag funcionando localmente (P01).
@@ -36,7 +45,7 @@ CRITÉRIOS DE ACEITE: o push na main atualiza o link público; um teste falhando
 FORMATO DA SAÍDA: arquivo .github/workflows/*.yml + passo a passo de configuração.
 ```
 
-### P03 · Pseudocódigo destacado + fila de prioridade (US-10, US-11)
+### C03 · Pseudocódigo destacado + fila de prioridade (US-10, US-11)
 ```text
 PAPEL: Atue como desenvolvedor full-stack sênior com experiência em ferramentas educacionais.
 CONTEXTO: O Dijkstra emite eventos frontier/visit/path. Feedback da Review: <colar>.
@@ -50,7 +59,7 @@ novos testes cobrindo data["line"].
 FORMATO DA SAÍDA: código + testes + atualização de docs/02-arquitetura.md.
 ```
 
-### P04 · Escrita: requisitos e arquitetura no Cap. 3
+### C04 · Escrita: requisitos e arquitetura no Cap. 3
 ```text
 PAPEL: Atue como orientador de TCC em Sistemas de Informação, especialista em normas ABNT.
 CONTEXTO: docs/01-visao-e-requisitos.md e docs/02-arquitetura.md descrevem o sistema.
@@ -66,7 +75,7 @@ FORMATO DA SAÍDA: texto pronto para colar no Word + lista de figuras a exportar
 
 ## Sprint 2 · Backtracking completo
 
-### P05 · Visualização da pilha de recursão (US-12, US-15)
+### C05 · Visualização da pilha de recursão (US-12, US-15)
 ```text
 PAPEL: Atue como desenvolvedor sênior e professor de Estruturas de Dados.
 CONTEXTO: backtracking.py simula a recursão com pilha explícita e emite visit/backtrack
@@ -79,7 +88,7 @@ testes atualizados.
 FORMATO DA SAÍDA: código + testes + captura de tela para o TCC.
 ```
 
-### P06 · Ordem dos vizinhos e modo exaustivo (US-13, US-14)
+### C06 · Ordem dos vizinhos e modo exaustivo (US-13, US-14)
 ```text
 PAPEL: Atue como desenvolvedor sênior.
 CONTEXTO: Backtracking com visualização de pilha pronto (P05).
@@ -91,7 +100,7 @@ CRITÉRIOS DE ACEITE: testes provando que o melhor custo do modo exaustivo == cu
 FORMATO DA SAÍDA: código + testes.
 ```
 
-### P07 · Escrita: resultados de Dijkstra e Backtracking
+### C07 · Escrita: resultados de Dijkstra e Backtracking
 ```text
 PAPEL: Atue como orientador de TCC.
 CONTEXTO: Métricas coletadas: <colar tabela de experimentos: semente, tamanho, aberturas,
@@ -106,7 +115,7 @@ FORMATO DA SAÍDA: texto + tabela formatada.
 
 ## Sprint 3 · Q-Learning
 
-### P08 · Motor do Q-Learning (US-16, US-17)
+### C08 · Motor do Q-Learning (US-16, US-17)
 ```text
 PAPEL: Atue como especialista em Aprendizado por Reforço e desenvolvedor Python sênior.
 CONTEXTO: Desenho previsto em docs/02-arquitetura.md (seção Q-Learning). Leia algorithms/base.py.
@@ -119,7 +128,7 @@ após N episódios chega ao objetivo; desempenho de >= 10 mil passos/s no deskto
 FORMATO DA SAÍDA: código + testes + parâmetros padrão recomendados (com justificativa).
 ```
 
-### P09 · Visualização do Q-Learning (US-18, US-19, US-20)
+### C09 · Visualização do Q-Learning (US-18, US-19, US-20)
 ```text
 PAPEL: Atue como desenvolvedor full-stack sênior com foco em visualização de dados.
 CONTEXTO: qlearning.py pronto (P08). Interface em ui/playground.py.
@@ -134,7 +143,7 @@ FORMATO DA SAÍDA: código + capturas de tela.
 
 ## Sprint 4 · Validação e polimento
 
-### P10 · Instrumento de validação com usuários (US-23)
+### C10 · Instrumento de validação com usuários (US-23)
 ```text
 PAPEL: Atue como pesquisador em Informática na Educação.
 CONTEXTO: Plataforma pronta; público: alunos do 1º ao 3º período. Restrições éticas
@@ -145,7 +154,7 @@ CRITÉRIOS DE ACEITE: aplicável em 20 min; perguntas ligadas à questão de pes
 FORMATO DA SAÍDA: roteiro + questionário pronto para Google Forms + plano de análise.
 ```
 
-### P11 · Revisão de qualidade e acessibilidade (US-21, US-24)
+### C11 · Revisão de qualidade e acessibilidade (US-21, US-24)
 ```text
 PAPEL: Atue como revisor de código sênior e especialista em UX/acessibilidade.
 TAREFA: Revise o código (bugs, legibilidade, desempenho) e a interface (contraste,
@@ -157,7 +166,7 @@ FORMATO DA SAÍDA: lista priorizada de problemas + correções aplicadas.
 
 ## Sprint 5 · Fechamento
 
-### P12 · Resumo, Abstract e Conclusão
+### C12 · Resumo, Abstract e Conclusão
 ```text
 PAPEL: Atue como orientador de TCC especialista em ABNT.
 CONTEXTO: <colar objetivos, resultados e discussão finais>.
@@ -166,7 +175,7 @@ e a Conclusão respondendo explicitamente à questão de pesquisa e a cada objet
 FORMATO DA SAÍDA: textos prontos para o Word.
 ```
 
-### P13 · Roteiro da apresentação final
+### C13 · Roteiro da apresentação final
 ```text
 PAPEL: Atue como especialista em apresentações acadêmicas.
 TAREFA: Monte um roteiro de 15–20 min com sugestão de slides e uma demo ao vivo

@@ -9,6 +9,7 @@ from __future__ import annotations
 from collections import Counter
 
 from algorithms.base import BACKTRACK, DONE, FAIL, FRONTIER, PATH, VISIT, Event
+from algorithms.qlearning import AGENT, EPISODE
 
 FRONTIER_STATE, VISITED_STATE, DEAD_STATE, PATH_STATE = "frontier", "visited", "dead", "path"
 
@@ -27,6 +28,14 @@ class RunState:
         self.finished = False
         self.found = False
         self.result: dict = {}
+        # Q-Learning
+        self.q = None              # tabela Q (referência viva, só leitura)
+        self.episode = 0
+        self.episodes = 0
+        self.epsilon = None
+        self.episode_steps = 0
+        self.rewards: list = []    # recompensa total de cada episódio
+        self.reached = 0           # episódios que chegaram ao objetivo
 
     def _set(self, cell, state: str) -> None:
         old = self.cells.get(cell)
@@ -37,26 +46,40 @@ class RunState:
 
     def apply(self, ev: Event) -> None:
         self.steps += 1
-        if ev.kind == FRONTIER:
+        kind = ev.kind
+        if kind == AGENT:                         # o mais frequente, por isso primeiro
+            self.current = ev.cell
+            if ev.data:
+                self.q = ev.data["q"]
+                self.episode = ev.data["episode"]
+                self.epsilon = ev.data["epsilon"]
+                self.episode_steps = 0
+            else:
+                self.episode_steps += 1
+        elif kind == EPISODE:
+            self.rewards.append(ev.data["reward"])
+            self.episodes = ev.data["episodes"]
+            self.reached += ev.data["reached"]
+        elif kind == FRONTIER:
             if self.cells.get(ev.cell) != VISITED_STATE:
                 self._set(ev.cell, FRONTIER_STATE)
             self.dist[ev.cell] = ev.data["dist"]
-        elif ev.kind == VISIT:
+        elif kind == VISIT:
             self._set(ev.cell, VISITED_STATE)
             self.visited += 1
             self.current = ev.cell
             if "depth" in ev.data:
                 self.depth = ev.data["depth"]
                 self.max_depth = max(self.max_depth, self.depth)
-        elif ev.kind == BACKTRACK:
+        elif kind == BACKTRACK:
             self._set(ev.cell, DEAD_STATE)
             self.depth = ev.data["depth"]
             self.current = ev.data.get("to")
-        elif ev.kind == PATH:
+        elif kind == PATH:
             self._set(ev.cell, PATH_STATE)
             self.path.append(ev.cell)
-        elif ev.kind in (DONE, FAIL):
+        elif kind in (DONE, FAIL):
             self.finished = True
-            self.found = ev.kind == DONE
+            self.found = kind == DONE
             self.result = dict(ev.data)
             self.current = None

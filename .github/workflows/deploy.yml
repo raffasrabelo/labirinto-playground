@@ -36,7 +36,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install "pygbag==0.9.3"
-      - run: python -m pygbag --build --title "Labirinto Playground" app
+      - run: python tools/build_web.py
       - uses: actions/upload-pages-artifact@v3
         with:
           path: app/build/web

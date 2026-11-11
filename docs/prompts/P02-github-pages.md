@@ -15,7 +15,7 @@ Sim, prepare o repositório e a publicação no GitHub Pages (prompt P02).
 Me diga o que eu preciso fazer na minha conta.
 ```
 
-Remete ao P02 do [catálogo](catalogo.md).
+Remete ao C02 do [catálogo](catalogo.md).
 
 ## Resultado obtido
 - Repositório Git local criado (branch `main`) com commit inicial da v0.1.

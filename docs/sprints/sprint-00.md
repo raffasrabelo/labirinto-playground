@@ -5,7 +5,7 @@
 | Período | 27/10/2026 – 28/10/2026 (sprint curta de arranque) |
 | Sprint Goal | Ter um protótipo navegável que prove a ideia do "playground de algoritmos" e um plano até 30/11 |
 | Review | 28/10/2026, com orientador e professora da disciplina |
-| Versão / tag | v0.1 · `sprint-0` |
+| Versão / tag | v0.2 · `sprint-0` (v0.1 = interface toda em Pygame; v0.2 = interface HTML/CSS) |
 
 ## Sprint Backlog
 | ID | Item | Status |
@@ -21,18 +21,26 @@
 | — | Dijkstra e Backtracking funcionando (versão inicial) | ✅ |
 | US-06 / US-08 | **Versão web (pygbag)** rodando no navegador + medição de desempenho (adiantado da S1, ver P01) | ✅ |
 | US-07 / T-02 | Repositório público + publicação automática no GitHub Pages (P02) | ✅ |
+| T-05 | **Interface refeita em HTML/CSS** com o labirinto em Pygame e ponte JSON (ADR-02, P03) | ✅ |
 | — | Documentação: visão, requisitos, arquitetura, processo, cronograma, backlog, prompts | ✅ |
 
-## Entregas (incremento v0.1)
-- Aplicação desktop em `app/` (`python main.py`).
-- **Mesma aplicação rodando no navegador**, sem nenhuma alteração de código:
-  **<https://raffasrabelo.github.io/labirinto-playground/>** (publicada automaticamente a cada push).
+## Entregas (incremento)
+- **v0.2 no navegador:** <https://raffasrabelo.github.io/labirinto-playground/>, com
+  controles, métricas e legenda em HTML/CSS e o labirinto desenhado em Pygame (ADR-02).
 - Código-fonte: <https://github.com/raffasrabelo/labirinto-playground>
 - Documentação em `docs/`.
-- Capturas de tela em `docs/img/`.
 
-![Dijkstra em execução](../img/v0.1-dijkstra-execucao.png)
-![Dijkstra concluído](../img/v0.1-dijkstra-concluido.png)
+![Comparação v0.1 × v0.2 na mesma execução](../img/comparacao-v0.1-v0.2.png)
+
+Capturas da v0.2 com os mesmos parâmetros da v0.1: [Dijkstra em execução](../img/v0.2-dijkstra-execucao.png) ·
+[Dijkstra concluído](../img/v0.2-dijkstra-concluido.png) · [Backtracking 41×41](../img/v0.2-backtracking-41x41.png) ·
+[celular](../img/v0.2-celular.png). Legendas em [08-legendas-das-figuras.md](../08-legendas-das-figuras.md).
+
+**Histórico: v0.1 (interface toda em Pygame).** Os algoritmos funcionavam, mas o design foi
+avaliado como fraco, o que motivou a ADR-02. As imagens abaixo servem de "antes" no TCC:
+
+![v0.1 · Dijkstra em execução](../img/v0.1-dijkstra-execucao.png)
+![v0.1 · Dijkstra concluído](../img/v0.1-dijkstra-concluido.png)
 
 ## Escrita do TCC (pendências encontradas no .docx)
 - [ ] Folha de rosto está com **"MACHADO 2021"** (a capa está 2026).
@@ -47,6 +55,7 @@
 ## Prompts utilizados
 - [P01 · Build web com pygbag](../prompts/P01-build-web.md)
 - [P02 · Repositório e publicação no GitHub Pages](../prompts/P02-github-pages.md)
+- [P03 · Interface híbrida: HTML/CSS + labirinto em Pygame](../prompts/P03-interface-hibrida.md)
 
 ## Sprint Review · roteiro da demonstração (≈ 12 min)
 
@@ -61,8 +70,12 @@
    4. Desenhar paredes e lama ao vivo, arrastar o objetivo e reexecutar.
    5. Usar **Passo** (tecla N) para mostrar a execução célula a célula.
    6. Mostrar o Q-Learning como "Sprint 3" no seletor.
-4. **Como foi construído (2 min):** diagrama de camadas (`docs/02-arquitetura.md`), algoritmos como geradores e testes automatizados.
-   Mostrar o **mesmo app no navegador** e citar a medição: 61×61 a 1000 passos/s em cerca de 10 ms por quadro, dentro dos 60 fps.
+4. **Como foi construído (3 min):** diagrama de camadas (`docs/02-arquitetura.md`), algoritmos como geradores e testes automatizados.
+   - **Primeira decisão de arquitetura tomada a partir de avaliação:** mostrar a imagem da v0.1
+     (tudo em Pygame) ao lado da v0.2 e explicar a ADR-02. O Pygame ficou só no labirinto e a
+     interface foi para HTML/CSS, com o mesmo código Python e os mesmos resultados.
+   - Citar a medição da v0.1: 61×61 a 1000 passos/s em cerca de 10 ms por quadro, dentro dos
+     60 fps. *(A v0.2 ainda não foi medida; ela desenha só o labirinto.)*
    → *"O principal risco técnico do projeto, rodar Pygame na web, já foi eliminado."*
    Enviar o link aos stakeholders para que testem durante a semana: o feedback assíncrono também entra na tabela abaixo.
 5. **Cronograma (1 min):** `docs/04-cronograma.md` e riscos.
@@ -74,6 +87,8 @@
 3. Qual a data exata de entrega do texto e da defesa?
 4. A linguagem e as cores da interface estão adequadas para um ingressante? O que mais confundiu?
 5. As reviews semanais às quartas funcionam? Qual o canal preferido (presencial, e-mail, link)?
+6. A divisão "Pygame para o labirinto + HTML/CSS para a interface" atende ao objetivo específico 2
+   ("projetar a interface gráfica... utilizando a biblioteca Pygame")? Ou o texto do objetivo deve ser ajustado?
 
 ### Feedback recebido
 | # | Stakeholder | Feedback | Tipo | Decisão / item gerado |

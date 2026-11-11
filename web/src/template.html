@@ -1,0 +1,335 @@
+<html lang="pt-br"><script src="{{cookiecutter.cdn}}pythons.js" type=module id="site" data-python="python{{cookiecutter.PYBUILD}}" data-os="snd,gui" async defer>#<!--
+
+# Bloco Python exigido pelo pygbag: baixa o app (.tar.gz), monta no sistema
+# de arquivos virtual e executa main.py. Adaptado do template padrão 0.9.3.
+
+import asyncio
+import platform
+from pathlib import Path
+
+async def custom_site():
+    import embed
+    platform.window.transfer.hidden = true
+    platform.window.canvas.style.visibility = "visible"
+
+    bundle = "{{cookiecutter.archive}}"
+    appdir = Path(f"/data/data/{bundle}")
+    appdir.mkdir()
+
+    if platform.window.location.host.find('.itch.zone') > 0:
+        import zipfile
+        async with platform.fopen("{{cookiecutter.archive}}.apk", "rb") as archive:
+            with zipfile.ZipFile(archive) as zip_ref:
+                zip_ref.extractall(appdir.as_posix())
+    else:
+        import tarfile
+        async with platform.fopen("{{cookiecutter.archive}}.tar.gz", "rb") as archive:
+            tar = tarfile.open(fileobj=archive, mode="r:gz")
+            tar.extractall(path=appdir.as_posix(), filter='tar')
+            tar.close()
+
+    platform.run_main(PyConfig, loaderhome=appdir / "assets", loadermain=None)
+
+    while embed.counter() < 0:
+        await asyncio.sleep(.1)
+
+    main = appdir / "assets" / "main.py"
+    await TopLevel_async_handler.start_toplevel(platform.shell, console=window.python.config.debug)
+    __import__(__name__).__file__ = main
+
+    def ui_callback(pkg):
+        platform.window.labirinto.loading(f"Instalando {pkg}...")
+
+    await shell.source(main, callback=ui_callback)
+    shell.interactive()
+
+asyncio.run(custom_site())
+
+# =============================================================================
+# --></script><head><!--
+--><script type="application/javascript">
+// Configuração lida pelo runtime do pygbag (pythons.js).
+// user_canvas_managed = 1: a página (e não o pygbag) decide o tamanho do canvas.
+config = {
+    xtermjs : "0",
+    _sdl2 : "canvas",
+    user_canvas : 0,
+    user_canvas_managed : 1,
+    gui_divider : 1,
+    ume_block : 0,
+    can_close : 0,
+    archive : "{{cookiecutter.archive}}",
+    gui_debug : 2,
+    cdn : "{{cookiecutter.cdn}}",
+    autorun : {{cookiecutter.autorun}},
+    PYBUILD : "{{cookiecutter.PYBUILD}}",
+    fb_ar : 1,
+    fb_width : "760",
+    fb_height : "760"
+}
+function custom_onload(debug_hidden) {}
+function custom_prerun() {}
+function custom_postrun() {}
+</script>
+
+    <title>{{cookiecutter.title}}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plataforma interativa para visualizar Backtracking, Dijkstra e Q-Learning resolvendo labirintos.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- @STYLE -->
+    <script src="{{cookiecutter.cdn}}/browserfs.min.js"></script>
+</head>
+
+<body class="is-loading" data-algorithm="dijkstra" data-mode="idle">
+
+<header class="topbar">
+    <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="1" y="1" width="30" height="30" rx="8" fill="var(--accent)"/>
+            <path d="M8 8h10v6h6v10H14v-6H8z" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <div>
+            <h1>Labirinto Playground</h1>
+            <p>Veja, passo a passo, como algoritmos resolvem labirintos</p>
+        </div>
+    </div>
+    <a class="ghost-link" href="https://github.com/raffasrabelo/labirinto-playground" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Código-fonte
+    </a>
+</header>
+
+<section class="controlbar" aria-label="Controles de execução">
+    <div class="transport">
+        <button class="icon-btn" id="btn-reset" title="Reiniciar (R)" aria-label="Reiniciar">
+            <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="play-btn" id="btn-play" title="Executar / pausar (Espaço)" aria-label="Executar">
+            <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>
+        </button>
+        <button class="icon-btn" id="btn-step" title="Avançar um passo (N)" aria-label="Avançar um passo">
+            <svg viewBox="0 0 24 24"><path d="M6 6v12l8.5-6zM17 6h2v12h-2z" fill="currentColor"/></svg>
+        </button>
+        <div class="counter">
+            <span class="eyebrow">Eventos</span>
+            <span class="counter-value" id="m-steps">0</span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <span class="eyebrow">Algoritmo</span>
+        <div class="segmented" id="algorithm" role="radiogroup" aria-label="Algoritmo">
+            <button role="radio" data-value="backtracking">Backtracking</button>
+            <button role="radio" data-value="dijkstra">Dijkstra</button>
+            <button role="radio" data-value="qlearning">Q-Learning</button>
+        </div>
+    </div>
+
+    <div class="control-group speed">
+        <label class="eyebrow" for="speed">Velocidade <output id="speed-out">20 passos/s</output></label>
+        <input type="range" id="speed" min="0" max="100" value="43">
+    </div>
+</section>
+
+<main class="layout">
+    <aside class="panel" aria-label="Configuração do labirinto">
+        <h2>Labirinto</h2>
+
+        <div class="field">
+            <label for="size">Tamanho <output id="size-out">21 × 21</output></label>
+            <input type="range" id="size" data-param="size" min="11" max="61" step="2" value="21">
+        </div>
+        <div class="field">
+            <label for="openness">Aberturas <output id="openness-out">10%</output></label>
+            <input type="range" id="openness" data-param="openness" min="0" max="50" step="5" value="10">
+            <small>Remove paredes e cria caminhos alternativos.</small>
+        </div>
+        <div class="field">
+            <label for="mud">Lama <output id="mud-out">15%</output></label>
+            <input type="range" id="mud" data-param="mud" min="0" max="40" step="5" value="15">
+            <small>Atravessar lama custa 5 (as demais células custam 1).</small>
+        </div>
+        <div class="field">
+            <label for="seed">Semente</label>
+            <div class="seed-row">
+                <input type="number" id="seed" data-param="seed" min="1" max="999" value="42">
+                <button class="btn" id="btn-new" title="Sortear um novo labirinto (G)">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="9" r="1.4" fill="currentColor"/><circle cx="15" cy="15" r="1.4" fill="currentColor"/><circle cx="15" cy="9" r="1.4" fill="currentColor"/><circle cx="9" cy="15" r="1.4" fill="currentColor"/></svg>
+                    Sortear
+                </button>
+            </div>
+            <small>A mesma semente gera sempre o mesmo labirinto.</small>
+        </div>
+        <button class="btn btn-block" id="btn-clear">Começar com grade vazia</button>
+
+        <div class="ql-params" data-only="qlearning">
+            <h2>Q-Learning</h2>
+            <div class="field">
+                <label for="alpha">Taxa de aprendizado α <output id="alpha-out">0,5</output></label>
+                <input type="range" id="alpha" data-param="alpha" min="0.05" max="1" step="0.05" value="0.5">
+                <small>Quanto cada nova experiência altera o que o agente já sabe.</small>
+            </div>
+            <div class="field">
+                <label for="gamma">Fator de desconto γ <output id="gamma-out">0,995</output></label>
+                <input type="range" id="gamma" data-param="gamma" min="0.5" max="0.995" step="0.005" value="0.995">
+                <small>Peso das recompensas futuras. Baixo = agente “míope”.</small>
+            </div>
+            <div class="field">
+                <label for="epsilon">Exploração ε inicial <output id="epsilon-out">0,3</output></label>
+                <input type="range" id="epsilon" data-param="epsilon" min="0" max="1" step="0.05" value="0.3">
+                <small>Chance de escolher uma ação aleatória em vez da melhor conhecida.</small>
+            </div>
+            <div class="field">
+                <label for="decay">Decaimento de ε <output id="decay-out">0,99</output></label>
+                <input type="range" id="decay" data-param="decay" min="0.9" max="1" step="0.005" value="0.99">
+                <small>A cada episódio, ε é multiplicado por este valor.</small>
+            </div>
+            <div class="field">
+                <label for="episodes">Episódios <output id="episodes-out">200</output></label>
+                <input type="range" id="episodes" data-param="episodes" min="10" max="1000" step="10" value="200">
+            </div>
+            <div class="field">
+                <label for="goal_reward">Recompensa no objetivo <output id="goal_reward-out">+100</output></label>
+                <input type="range" id="goal_reward" data-param="goal_reward" min="10" max="500" step="10" value="100">
+            </div>
+            <div class="field">
+                <label for="wall_penalty">Penalidade na parede <output id="wall_penalty-out">−10</output></label>
+                <input type="range" id="wall_penalty" data-param="wall_penalty" min="0" max="50" step="1" value="10">
+                <small>Cada passo custa −1 (−5 na lama).</small>
+            </div>
+            <button class="btn btn-block" id="btn-ql-defaults">Restaurar valores padrão</button>
+        </div>
+
+        <h2>Desenhar</h2>
+        <div class="segmented brush" id="brush" role="radiogroup" aria-label="Pincel">
+            <button role="radio" data-value="wall"><i class="swatch sw-wall"></i>Parede</button>
+            <button role="radio" data-value="mud"><i class="swatch sw-mud"></i>Lama</button>
+            <button role="radio" data-value="erase"><i class="swatch sw-empty"></i>Borracha</button>
+        </div>
+        <p class="hint">Clique e arraste no labirinto para desenhar; o botão direito apaga.
+            Arraste os quadrados <b class="c-start">azul</b> e <b class="c-goal">vermelho</b> para mover início e objetivo.</p>
+
+        <h2>Exibição</h2>
+        <label class="switch" data-only="dijkstra">
+            <input type="checkbox" id="show_numbers" checked>
+            <span class="switch-track"></span>
+            Mostrar distâncias
+        </label>
+        <label class="switch" data-only="qlearning">
+            <input type="checkbox" id="show_policy" checked>
+            <span class="switch-track"></span>
+            Mostrar setas da política
+        </label>
+        <p class="hint" data-only="backtracking">Sem opções de exibição para este algoritmo.</p>
+    </aside>
+
+    <section class="stage" aria-label="Labirinto">
+        <div class="board-card">
+            <div class="board-wrap" id="board-wrap">
+                <canvas class="emscripten" id="canvas" width="1px" height="1px" oncontextmenu="event.preventDefault()" tabindex="1"></canvas>
+                <div class="loader" id="loader">
+                    <div class="spinner"></div>
+                    <strong id="loader-title">Carregando o Python no navegador...</strong>
+                    <div id="transfer">
+                        <div id="status">Baixando...</div>
+                        <progress value="0" max="100" id="progress"></progress>
+                    </div>
+                    <small>Na primeira visita isso leva de 10 a 20 segundos.</small>
+                </div>
+            </div>
+        </div>
+        <ul class="legend" aria-label="Legenda">
+            <li><i class="swatch sw-start"></i>Início</li>
+            <li><i class="swatch sw-goal"></i>Objetivo</li>
+            <li><i class="swatch sw-wall"></i>Parede</li>
+            <li><i class="swatch sw-mud"></i>Lama</li>
+            <li data-only="dijkstra"><i class="swatch sw-frontier"></i>Na fila</li>
+            <li data-not="qlearning"><i class="swatch sw-visited"></i>Expandida</li>
+            <li data-only="backtracking"><i class="swatch sw-dead"></i>Retrocesso</li>
+            <li data-not="qlearning"><i class="swatch sw-current"></i>Atual</li>
+            <li data-only="qlearning"><i class="swatch sw-heat"></i>Valor aprendido (baixo → alto)</li>
+            <li data-only="qlearning"><i class="swatch sw-agent"></i>Agente</li>
+            <li data-only="qlearning"><span class="arrow-icon" aria-hidden="true">▶</span>Melhor ação</li>
+            <li><i class="swatch sw-path"></i>Caminho final</li>
+        </ul>
+    </section>
+
+    <aside class="panel" aria-label="Resultado">
+        <h2>Resultado</h2>
+        <div class="status" id="status-pill"><span class="dot"></span><span id="status-text">Carregando</span></div>
+
+        <div class="metrics">
+            <div class="metric" data-not="qlearning">
+                <span class="metric-value" id="m-visited">0</span>
+                <span class="metric-label">células expandidas</span>
+            </div>
+            <div class="metric" data-only="qlearning">
+                <span class="metric-value"><span id="m-episode">0</span><small class="of">/<span id="m-episodes">200</span></small></span>
+                <span class="metric-label">episódio</span>
+            </div>
+            <div class="metric" data-only="qlearning">
+                <span class="metric-value" id="m-epsilon">–</span>
+                <span class="metric-label">exploração ε atual</span>
+            </div>
+            <div class="metric" data-only="qlearning">
+                <span class="metric-value" id="m-last-reward">–</span>
+                <span class="metric-label">recompensa do último episódio</span>
+            </div>
+            <div class="metric" data-only="qlearning">
+                <span class="metric-value" id="m-reached">0</span>
+                <span class="metric-label">episódios que chegaram ao objetivo</span>
+            </div>
+            <div class="metric" data-only="dijkstra">
+                <span class="metric-value" id="m-frontier">0</span>
+                <span class="metric-label">na fila de prioridade</span>
+            </div>
+            <div class="metric" data-only="backtracking">
+                <span class="metric-value" id="m-depth">0</span>
+                <span class="metric-label">na pilha (máx. <span id="m-maxdepth">0</span>)</span>
+            </div>
+            <div class="metric">
+                <span class="metric-value" id="m-moves">–</span>
+                <span class="metric-label">passos do caminho</span>
+            </div>
+            <div class="metric metric-accent">
+                <span class="metric-value" id="m-cost">–</span>
+                <span class="metric-label">custo do caminho</span>
+            </div>
+        </div>
+
+        <figure class="chart" data-only="qlearning">
+            <figcaption>Recompensa por episódio</figcaption>
+            <svg id="reward-chart" viewBox="0 0 260 120" role="img" aria-label="Gráfico da recompensa total em cada episódio"></svg>
+            <small>Sobe à medida que o agente aprende um caminho melhor.</small>
+        </figure>
+
+        <h2>Como funciona</h2>
+        <p class="description" id="description"></p>
+
+        <h2>Atalhos</h2>
+        <dl class="shortcuts">
+            <div><dt><kbd>Espaço</kbd></dt><dd>executar / pausar</dd></div>
+            <div><dt><kbd>N</kbd></dt><dd>um passo</dd></div>
+            <div><dt><kbd>R</kbd></dt><dd>reiniciar</dd></div>
+            <div><dt><kbd>G</kbd></dt><dd>novo labirinto</dd></div>
+        </dl>
+    </aside>
+</main>
+
+<footer class="footer">
+    TCC · Sistemas de Informação · IFSULDEMINAS, Campus Machado · v0.3
+</footer>
+
+<!-- elementos esperados pelo runtime do pygbag -->
+<canvas class="emscripten" id="canvas3d" width="1px" height="1px" hidden></canvas>
+<div id="infobox" hidden></div>
+<div id="html" hidden></div>
+
+<!-- @SCRIPT -->
+</body>
+</html>
