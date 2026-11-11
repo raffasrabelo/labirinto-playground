@@ -57,5 +57,7 @@ no TCC.
 - Rejeitado:
 
 ## Evidências
-- Commit / deploy: *(preencher após a publicação)*
+- Commit: `ace2e97` · deploy: <https://github.com/raffasrabelo/labirinto-playground/actions/runs/43106290875> (test, build e deploy ✅)
+- Site público testado após o deploy (Edge): página carregou em 3,3 s sem cache, rodapé v0.3;
+  Q-Learning com os valores padrão aprendeu o caminho de custo 120 (56 passos) em 0,5 s.
 - Capturas: `docs/img/v0.3-qlearning-*.png` (legendas em [08](../08-legendas-das-figuras.md))
