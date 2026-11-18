@@ -57,4 +57,7 @@ o professor sugeriu colocar uma opção de mostrar os valores de cada posição 
 
 ## Evidências
 - Capturas: `docs/img/v0.3-qlearning-valores-4-acoes.png`, `docs/img/v0.3-qlearning-valores-melhor.png`
-- Commit / deploy: *(preencher após a publicação)*
+- Commit: `b734864` · deploy: <https://github.com/raffasrabelo/labirinto-playground/actions/runs/44417447532> (test, build e deploy ✅)
+- Site público testado após o deploy (Edge, mouse real): rodapé v0.3.1; os mesmos resultados
+  do teste local (inspetor, aviso em 21 × 21 no modo "4 ações", modo "Melhor" visível,
+  nenhum erro de JavaScript).
