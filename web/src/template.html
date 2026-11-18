@@ -225,6 +225,16 @@ function custom_postrun() {}
             <span class="switch-track"></span>
             Mostrar setas da política
         </label>
+        <div class="field" data-only="qlearning">
+            <label>Valores da tabela Q no labirinto</label>
+            <div class="segmented qvalues" id="q_values" role="radiogroup" aria-label="Valores da tabela Q no labirinto">
+                <button role="radio" data-value="off">Nenhum</button>
+                <button role="radio" data-value="max">Melhor</button>
+                <button role="radio" data-value="all">4 ações</button>
+            </div>
+            <small id="q-values-help">“Melhor” mostra o maior Q de cada célula; “4 ações” mostra Q(↑), Q(→), Q(↓) e Q(←), com a melhor sublinhada.</small>
+            <small class="warn" id="q-values-warn" hidden></small>
+        </div>
         <p class="hint" data-only="backtracking">Sem opções de exibição para este algoritmo.</p>
     </aside>
 
@@ -308,6 +318,21 @@ function custom_postrun() {}
             <small>Sobe à medida que o agente aprende um caminho melhor.</small>
         </figure>
 
+        <section class="inspector" data-only="qlearning" aria-live="polite">
+            <div class="inspector-head">
+                <strong>Tabela Q da célula</strong>
+                <span id="insp-cell">–</span>
+            </div>
+            <div class="qcross" id="insp-cross">
+                <span class="q q-up" data-a="0"><b>↑</b> <span>–</span></span>
+                <span class="q q-left" data-a="3"><b>←</b> <span>–</span></span>
+                <span class="q-center" id="insp-center">s</span>
+                <span class="q q-right" data-a="1"><b>→</b> <span>–</span></span>
+                <span class="q q-down" data-a="2"><b>↓</b> <span>–</span></span>
+            </div>
+            <small id="insp-note">Passe o mouse sobre uma célula do labirinto.</small>
+        </section>
+
         <h2>Como funciona</h2>
         <p class="description" id="description"></p>
 
@@ -322,7 +347,7 @@ function custom_postrun() {}
 </main>
 
 <footer class="footer">
-    TCC · Sistemas de Informação · IFSULDEMINAS, Campus Machado · v0.3
+    TCC · Sistemas de Informação · IFSULDEMINAS, Campus Machado · v0.3.1
 </footer>
 
 <!-- elementos esperados pelo runtime do pygbag -->

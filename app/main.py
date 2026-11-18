@@ -95,6 +95,7 @@ async def main():
                 size = (max(64, int(cmd["w"])), max(64, int(cmd["h"])))
                 if size != screen.get_size():
                     screen = pygame.display.set_mode(size)
+                board.dpr = max(1.0, float(cmd.get("dpr", 1.0)))
             else:
                 session.command(cmd)
 

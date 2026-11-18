@@ -43,6 +43,7 @@ Status: ✅ pronto · 🔄 em andamento · ⏳ a fazer · ✂️ cortado.
 | US-19 | Como aluno, quero ver a curva de recompensa por episódio | Should | S3 | ✅ com média móvel |
 | US-20 | Como aluno, quero assistir ao agente treinado percorrer o labirinto | Must | S3 | ✅ percurso pela política aprendida ao fim do treino |
 | US-26 | Como professor, quero um roteiro de aula com experimentos verificados | Should | S3 | ✅ [09-roteiro-aula-qlearning.md](09-roteiro-aula-qlearning.md) |
+| US-27 | Como professor, quero ver os valores da tabela Q de cada estado (sugestão do orientador após a aula) | Should | S3 | ✅ v0.3.1: valores no labirinto + inspetor (P05) |
 
 ## Épico E6 · Validação e acabamento
 | ID | História de usuário | Prior. | Sprint | Status |

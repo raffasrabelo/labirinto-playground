@@ -34,8 +34,10 @@ def mix(a, b, t: float):
 _fonts = {}
 
 
-def font(size: int) -> pygame.font.Font:
+def font(size: int, bold: bool = False) -> pygame.font.Font:
     """Fonte padrão do Pygame (única disponível no navegador sem arquivos extras)."""
-    if size not in _fonts:
-        _fonts[size] = pygame.font.Font(None, size)
-    return _fonts[size]
+    key = (size, bold)
+    if key not in _fonts:
+        _fonts[key] = pygame.font.Font(None, size)
+        _fonts[key].set_bold(bold)
+    return _fonts[key]

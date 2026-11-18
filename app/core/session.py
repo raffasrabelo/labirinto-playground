@@ -12,6 +12,7 @@ import time
 
 from algorithms import ALGORITHMS
 from algorithms.base import DONE, FAIL
+from algorithms.qlearning import best_action
 
 from .grid import EMPTY, MUD, WALL
 from .maze import generate_maze
@@ -20,6 +21,8 @@ from .run_state import RunState
 IDLE, RUNNING, PAUSED, FINISHED = "idle", "running", "paused", "finished"
 
 BRUSHES = {"wall": WALL, "mud": MUD, "erase": EMPTY}
+# valores da tabela Q desenhados no labirinto: nenhum, o melhor de cada célula, ou as 4 ações
+Q_VALUE_MODES = ("off", "max", "all")
 
 # nome do parâmetro -> (mínimo, máximo)
 LIMITS = {
@@ -65,9 +68,12 @@ class Session:
             "goal_reward": 100,
             "wall_penalty": 10,
             "show_policy": True,
+            "q_values": "off",
         }
         self.maze_version = 0    # muda sempre que o labirinto muda
         self.drag = None         # "start" | "goal" | tipo de célula sendo pintado
+        self.hover = None        # célula sob o mouse (inspetor da tabela Q)
+        self.q_fit = {"max": True, "all": True}  # se os números cabem nas células (BoardView)
         self.regenerate()
 
     # ------------------------------------------------------------ comandos --
@@ -85,6 +91,8 @@ class Session:
             self.new_maze()
         elif kind == "clear":
             self.clear_grid()
+        elif kind == "hover_clear":
+            self.hover = None
 
     def set_param(self, name: str, value) -> None:
         if name in LIMITS:
@@ -104,6 +112,9 @@ class Session:
                 return
         elif name in ("show_numbers", "show_policy"):
             value = bool(value)
+        elif name == "q_values":
+            if value not in Q_VALUE_MODES:
+                return
         else:
             return
 
@@ -214,6 +225,28 @@ class Session:
     def edit_end(self) -> None:
         self.drag = None
 
+    def hover_at(self, cell) -> None:
+        """Célula sob o mouse (ou None), mostrada no inspetor da tabela Q."""
+        self.hover = cell if cell is not None and self.grid.in_bounds(cell) else None
+
+    def _inspect(self):
+        """Os 4 valores Q da célula sob o mouse ou, sem mouse, da célula do agente."""
+        if self.params["algorithm"] != "qlearning":
+            return None
+        cell, source = (self.hover, "mouse") if self.hover is not None else (self.run.current, "agent")
+        if cell is None:
+            return None
+        qs = self.run.q.get(cell) if self.run.q else None
+        explored = bool(qs) and max(qs) != min(qs)
+        return {
+            "cell": list(cell),
+            "source": source,
+            "wall": self.grid.get(cell) == WALL,
+            "goal": cell == self.grid.goal,
+            "q": [round(v, 1) for v in qs] if qs else None,
+            "best": best_action(qs) if explored else None,
+        }
+
     # ------------------------------------------------------------- retrato --
     def snapshot(self) -> dict:
         run = self.run
@@ -244,6 +277,8 @@ class Session:
                 "reached": run.reached,
             },
             "rewards": downsample(run.rewards, CHART_POINTS),
+            "inspect": self._inspect(),
+            "q_fit": self.q_fit,
         }
 
 

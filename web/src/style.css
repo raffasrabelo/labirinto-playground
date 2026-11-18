@@ -35,6 +35,9 @@
 
 * { box-sizing: border-box; }
 
+/* o atributo hidden sempre esconde, mesmo com regras de display mais específicas */
+[hidden] { display: none !important; }
+
 html, body { margin: 0; }
 
 body {
@@ -408,6 +411,47 @@ body[data-algorithm="qlearning"] [data-not="qlearning"] { display: none !importa
 .chart .avg { fill: none; stroke: #6d28d9; stroke-width: 2; vector-effect: non-scaling-stroke; }
 .chart text { font-size: 9px; fill: var(--muted); }
 .metric .of { font-size: 14px; color: var(--muted); font-weight: 500; }
+
+/* opção de valores Q e aviso quando os números não cabem nas células */
+.qvalues { display: flex; width: 100%; margin: 6px 0 4px; }
+.qvalues button { flex: 1; justify-content: center; padding: 6px 4px; font-size: 13px; }
+.field small.warn { color: #b54708; }
+
+/* inspetor: os 4 valores Q de uma célula, em cruz */
+.inspector {
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 12px;
+    border: 1px solid #ddd6fe;
+    border-radius: var(--radius-sm);
+    background: #faf8ff;
+}
+.inspector-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 13px; }
+.inspector-head span { color: var(--muted); font-variant-numeric: tabular-nums; }
+.qcross {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas: ". up ." "left center right" ". down .";
+    align-items: center;
+    justify-items: center;
+    gap: 4px 8px;
+    font-variant-numeric: tabular-nums;
+}
+.qcross .q { font-size: 15px; font-weight: 500; color: var(--text-2); white-space: nowrap; }
+.qcross .q b { color: var(--muted); font-weight: 600; }
+.qcross .q.best { color: #6d28d9; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.qcross .q.best b { color: #6d28d9; }
+.q-up { grid-area: up; } .q-down { grid-area: down; }
+.q-left { grid-area: left; justify-self: end; } .q-right { grid-area: right; justify-self: start; }
+.q-center {
+    grid-area: center;
+    width: 34px; height: 34px;
+    display: grid; place-items: center;
+    border-radius: 6px;
+    background: #ede9fe;
+    color: #6d28d9;
+    font-size: 12px; font-weight: 600;
+}
+.inspector small { color: var(--muted); font-size: 12px; line-height: 1.4; }
 
 /* ----------------------------------------------------------- resultado -- */
 .status {

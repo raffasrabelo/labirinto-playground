@@ -42,6 +42,17 @@ parede, +100 ao chegar.
      da saída e "voltam" pelo labirinto;
    - **o gráfico de recompensa por episódio sobe:** o agente erra menos a cada episódio.
 4. No fim, o agente percorre o caminho aprendido (verde).
+5. **Abrir a tabela Q** (v0.3.1, sugestão do orientador): em **Exibição → Valores da tabela Q**,
+   escolher **4 ações** (na grade 11 × 11) e passar o mouse sobre as células para usar o
+   **inspetor**, no painel da direita. Perguntas:
+   - "Por que, nesta célula, o valor da direita é maior que o da esquerda?"
+   - "O que acontece com os valores à medida que nos aproximamos da saída?"
+     Eles crescem até perto de +100.
+   - Usar **Passo (N)** com o inspetor na célula do agente para ver **um valor mudar a cada
+     passo**: é a fórmula de atualização acontecendo.
+
+   Em grades maiores, use **Melhor**, que mostra só o maior Q de cada célula, ou apenas o
+   inspetor. A página avisa quando os números não cabem.
 
 ### 3. Experimentos com os parâmetros (15 min)
 Fazer uma pergunta, deixar a turma **prever** a resposta e só então executar.

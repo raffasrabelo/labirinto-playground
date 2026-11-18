@@ -6,7 +6,7 @@ resolvendo labirintos, inspirada no [TensorFlow Playground](https://playground.t
 TCC · Sistemas de Informação · IFSULDEMINAS, Campus Machado
 Autores: Arielce José Pereira Junior e Rafael da Silva Rabelo · Orientador: Prof. Matheus Eloy Franco
 
-**Versão atual:** v0.3: Backtracking, Dijkstra e **Q-Learning**, interface web (HTML/CSS) com o labirinto em Pygame.
+**Versão atual:** v0.3.1: Backtracking, Dijkstra e **Q-Learning** (com os valores da tabela Q visíveis no labirinto), interface web (HTML/CSS) com o labirinto em Pygame.
 
 ![Labirinto Playground v0.2: Dijkstra concluído](docs/img/v0.2-dijkstra-concluido.png)
 

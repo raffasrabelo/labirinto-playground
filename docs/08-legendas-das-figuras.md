@@ -109,6 +109,23 @@ evidencie só a mudança de interface.
   recompensa do objetivo, descontada ao longo de dezenas de passos, deixa de compensar o
   custo do caminho, e a política aprendida não chega à saída."
 
+### A12 · v0.3.1: os 4 valores da tabela Q em cada célula
+- **Arquivo:** `docs/img/v0.3-qlearning-valores-4-acoes.png`
+- **Legenda:** Versão 0.3.1: valores da tabela Q das quatro ações em cada célula do caminho aprendido, com a melhor ação sublinhada, e inspetor de célula
+- **Fonte:** Elaborado pelos autores (2026).
+- **Chamada:** "Por sugestão do orientador, a versão 0.3.1 passou a exibir os valores da
+  tabela Q (Figura N). Em cada célula aparecem Q(↑), Q(→), Q(↓) e Q(←), e a melhor ação fica
+  sublinhada; o inspetor ao lado mostra os mesmos valores, com uma casa decimal, para a
+  célula sob o mouse."
+
+### A13 · v0.3.1: melhor valor de cada estado
+- **Arquivo:** `docs/img/v0.3-qlearning-valores-melhor.png`
+- **Legenda:** Versão 0.3.1: maior valor Q de cada estado em uma grade 21 × 21 após o treinamento
+- **Fonte:** Elaborado pelos autores (2026).
+- **Chamada:** "Em grades maiores, o modo que mostra apenas o maior valor de cada estado
+  (Figura N) permite acompanhar como os valores crescem à medida que o agente se aproxima
+  do objetivo."
+
 ---
 
 ## B. Metodologia e processo (Scrum)

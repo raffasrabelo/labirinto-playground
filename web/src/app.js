@@ -97,6 +97,9 @@
 
         setChecked("#algorithm", p.algorithm);
         setChecked("#brush", p.brush);
+        setChecked("#q_values", p.q_values);
+        renderQValuesWarning(p.q_values, state.q_fit);
+        renderInspector(state.inspect);
 
         for (const name of RANGE_PARAMS) {
             const input = $(`#${name}`);
@@ -140,6 +143,44 @@
         }
     }
 
+    // ----------------------------- valores e inspetor da tabela Q --
+    const dec1 = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    const Q_WARN = {
+        max: "Nesta grade os números ficariam pequenos demais. Use uma grade menor ou o inspetor ao lado.",
+        all: "Os 4 valores só cabem em grades pequenas (11 × 11 ou 13 × 13). Use “Melhor” ou o inspetor ao lado.",
+    };
+
+    function renderQValuesWarning(mode, fit) {
+        const warn = $("#q-values-warn");
+        const show = mode !== "off" && Boolean(fit) && !fit[mode];
+        warn.hidden = !show;
+        if (show && warn.textContent !== Q_WARN[mode]) warn.textContent = Q_WARN[mode];
+    }
+
+    function renderInspector(info) {
+        const cells = $$("#insp-cross .q");
+        const note = $("#insp-note");
+        let noteText = "Passe o mouse sobre uma célula do labirinto.";
+        if (!info) {
+            $("#insp-cell").textContent = "–";
+            cells.forEach((el) => { el.classList.remove("best"); el.lastElementChild.textContent = "–"; });
+        } else {
+            const where = "coluna " + info.cell[0] + ", linha " + info.cell[1];
+            $("#insp-cell").textContent = info.source === "agent" ? where + " · agente" : where;
+            cells.forEach((el) => {
+                const a = Number(el.dataset.a);
+                el.classList.toggle("best", info.best === a);
+                el.lastElementChild.textContent = info.q ? dec1.format(info.q[a]) : "–";
+            });
+            if (info.wall) noteText = "Parede: o agente nunca está aqui, então não há valores.";
+            else if (info.goal) noteText = "Objetivo: o episódio termina ao chegar, então não há valores.";
+            else if (!info.q) noteText = "O agente ainda não passou por esta célula: todos os valores valem 0.";
+            else if (info.source === "agent") noteText = "Mostrando a célula do agente. Passe o mouse sobre outra célula para inspecioná-la.";
+            else noteText = "Q(s, a): quanto o agente espera ganhar daqui até o fim indo nessa direção. Sublinhado: a melhor ação.";
+        }
+        if (note.textContent !== noteText) note.textContent = noteText;
+    }
+
     // ---------------------------------- gráfico de recompensa (Q-Learning) --
     function drawChart(values) {
         const svg = $("#reward-chart");
@@ -179,7 +220,7 @@
     $("#btn-new").addEventListener("click", () => send({ type: "new_maze" }));
     $("#btn-clear").addEventListener("click", () => send({ type: "clear" }));
 
-    for (const group of ["algorithm", "brush"]) {
+    for (const group of ["algorithm", "brush", "q_values"]) {
         $$(`#${group} button`).forEach((b) => {
             b.addEventListener("click", () => {
                 send({ type: "set", name: group, value: b.dataset.value });
@@ -238,9 +279,11 @@
     function reportSize() {
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         const rect = wrap.getBoundingClientRect();
-        send({ type: "resize", w: Math.round(rect.width * dpr), h: Math.round(rect.height * dpr) });
+        send({ type: "resize", w: Math.round(rect.width * dpr), h: Math.round(rect.height * dpr), dpr: dpr });
     }
     new ResizeObserver(reportSize).observe(wrap);
+    // ao sair do labirinto, o inspetor volta a mostrar a célula do agente
+    $("#canvas").addEventListener("mouseleave", () => send({ type: "hover_clear" }));
     window.addEventListener("resize", reportSize);
     reportSize();
 })();

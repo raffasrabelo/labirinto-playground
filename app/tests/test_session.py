@@ -119,3 +119,37 @@ def test_mudar_parametro_do_q_learning_reinicia_o_treino():
     assert s.mode == RUNNING
     s.command({"type": "set", "name": "gamma", "value": 0.9})
     assert s.mode == IDLE and s.run.steps == 0
+
+
+def test_modo_dos_valores_q_e_validado_e_nao_reinicia_o_treino():
+    s = Session()
+    s.command({"type": "set", "name": "algorithm", "value": "qlearning"})
+    s.command({"type": "play"})
+    s.update(0.5)
+    s.command({"type": "set", "name": "q_values", "value": "all"})
+    assert s.params["q_values"] == "all" and s.mode == RUNNING   # só muda a exibição
+    s.command({"type": "set", "name": "q_values", "value": "tudo"})
+    assert s.params["q_values"] == "all"
+
+
+def test_inspetor_mostra_a_celula_do_mouse_ou_a_do_agente():
+    s = Session()
+    assert s.snapshot()["inspect"] is None                      # fora do Q-Learning
+    s.command({"type": "set", "name": "algorithm", "value": "qlearning"})
+    s.command({"type": "set", "name": "speed", "value": 100_000})
+    s.command({"type": "play"})
+    run_to_end(s)
+    # célula do caminho logo após o início: já explorada, com uma melhor ação definida
+    cell = s.run.path[1]
+    s.hover_at(cell)
+    info = s.snapshot()["inspect"]
+    assert info["source"] == "mouse" and info["cell"] == list(cell)
+    assert len(info["q"]) == 4 and info["best"] == max(range(4), key=lambda a: info["q"][a])
+    s.hover_at((1, 1))                                            # parede no labirinto gerado
+    assert s.snapshot()["inspect"]["wall"] is True
+    s.command({"type": "hover_clear"})
+    assert s.hover is None
+    s.command({"type": "reset"})
+    s.command({"type": "step"})
+    info = s.snapshot()["inspect"]
+    assert info["source"] == "agent" and info["cell"] == list(s.grid.start)

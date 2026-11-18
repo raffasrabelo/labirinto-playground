@@ -375,9 +375,18 @@ stateDiagram-v2
   velocidade máxima.
 
 Novos parâmetros aceitos por `{"type": "set"}`: `alpha`, `gamma`, `epsilon`, `decay`,
-`episodes`, `goal_reward`, `wall_penalty`, `show_policy`. Novos campos do estado:
+`episodes`, `goal_reward`, `wall_penalty`, `show_policy` e `q_values` (`off` | `max` | `all`,
+v0.3.1). Novos campos do estado:
 `metrics.episode`, `metrics.episodes`, `metrics.epsilon`, `metrics.episode_steps`,
 `metrics.last_reward`, `metrics.reached` e a lista `rewards`.
+
+**Valores da tabela Q e inspetor (v0.3.1, P05).** O comando `resize` passou a levar `dpr`
+(densidade de pixels), para o desenho decidir se os números são legíveis no tamanho real da
+tela (célula ≥ 28 px de tela no modo `max`, ≥ 42 px no modo `all`); o resultado volta no
+estado como `q_fit: {"max": bool, "all": bool}`. O estado também traz `inspect`: os 4
+valores Q da célula sob o mouse ou, sem mouse, da célula do agente (`cell`, `source`, `q`,
+`best`, `wall`, `goal`). O comando `{"type": "hover_clear"}` é enviado quando o mouse sai do
+labirinto.
 
 ## Implantação: onde cada parte roda
 
