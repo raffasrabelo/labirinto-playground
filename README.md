@@ -86,6 +86,7 @@ roda os testes, gera o build web e publica no GitHub Pages. Se um teste falhar, 
 | [08 · Legendas das figuras](docs/08-legendas-das-figuras.md) | Legenda, fonte e frase de chamada (ABNT) de todas as capturas e diagramas |
 | [09 · Roteiro de aula: Q-Learning](docs/09-roteiro-aula-qlearning.md) | Experimentos verificados para uso em sala e o que registrar para o TCC |
 | [10 · Discussão dos resultados](docs/10-discussao-resultados.md) | Texto da seção 4.1 do TCC, referências ABNT e verificação de cada uma |
+| [11 · Manual de uso](docs/11-manual-de-uso.md) | Como usar todos os parâmetros, por algoritmo (Apêndice A do TCC) |
 | [Sprints](docs/sprints/) | Planejamento, review, feedback e retrospectiva de cada sprint |
 | [Prompts](docs/prompts/) | Registro e catálogo de prompts de IA |
 

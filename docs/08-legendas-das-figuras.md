@@ -13,9 +13,9 @@ Para a fonte, use um parágrafo logo abaixo da imagem, em fonte menor (10 pt).
 > As figuras estão em ordem temática, não na ordem em que vão aparecer no TCC. A coluna
 > "Seção sugerida" do [índice de diagramas](07-diagramas.md) ajuda a posicioná-las.
 
-**Já inseridas no TCC** (versão de 27/11/2026): Figura 1 = B2; Figuras 2–4 = A1–A3;
-Figuras 5–8 = A4–A7; Figuras 9–13 = A9–A13; Figuras 14–15 = A14; Figuras 16–18 = A15
-(detalhes em [P08](prompts/P08-correcao-interruptor-figuras.md)).
+**No TCC (versão de 27/11/2026, P12):** só imagens da versão atual. Figura 1 = B2; Figuras 2–13 =
+A16 (capturas da v0.4.1, nos Resultados); Figuras 14–15 = A17 (manual de uso, Apêndice A). As
+capturas A1–A15, de versões anteriores, ficam aqui como registro do histórico do projeto.
 
 ---
 
@@ -145,6 +145,29 @@ evidencie só a mudança de interface.
 - **Chamada:** "Por sugestão do orientador, a versão 0.4 permite escolher qual valor
   calculado o labirinto exibe em todas as células (Figura N): o valor do estado, o valor de
   cada ação ou o número de visitas, que evidencia onde o agente concentrou a exploração."
+
+### A16 · v0.4.1: capturas da versão atual (Figuras 2–13 do TCC)
+Fonte de todas: Elaborado pelos autores (2026). Capturadas no site publicado, em 1440 × 900 (2×).
+
+| Figura | Arquivo (`docs/img/`) | Legenda (depois de "Versão 0.4.1:") |
+|---|---|---|
+| 2 | `v0.4.1-dijkstra-execucao.png` | algoritmo de Dijkstra em execução após 120 eventos (grade 21 × 21, semente 42) |
+| 3 | `v0.4.1-dijkstra-concluido.png` | caminho de menor custo encontrado pelo algoritmo de Dijkstra, com a distância acumulada em cada célula |
+| 4 | `v0.4.1-backtracking-41x41.png` | caminho encontrado pelo Backtracking em grade 41 × 41, com os retrocessos destacados |
+| 5 | `v0.4.1-celular.png` | interface exibida em tela de celular (390 pixels de largura) |
+| 6 | `v0.4.1-qlearning-treinando.png` | agente de Q-Learning após 40 de 200 episódios de treinamento, com o valor aprendido em cada célula e a melhor ação indicada por setas |
+| 7 | `v0.4.1-qlearning-concluido.png` | caminho percorrido pelo agente de Q-Learning seguindo a política aprendida (grade 21 × 21, semente 42) |
+| 8 | `v0.4.1-qlearning-gama-095.png` | com fator de desconto γ = 0,95, o agente não aprende o caminho na grade 21 × 21 |
+| 9 | `v0.4.1-visualizar-4-acoes.png` | valores Q(s, a) das quatro ações nas células do caminho aprendido, com a melhor ação sublinhada, e inspetor da célula sob o mouse (grade 11 × 11) |
+| 10 | `v0.4.1-visualizar-vs.png` | valor de cada estado, V(s), em todas as células da grade 21 × 21 após o treinamento |
+| 11 | `v0.4.1-visualizar-left.png` | valor de Q(s, ←) em todos os estados do labirinto |
+| 12 | `v0.4.1-visualizar-visitas.png` | número de visitas do agente a cada estado, com o caminho aprendido destacado pela borda verde |
+| 13 | `v0.4.1-visualizar-41x41-up.png` | valor de Q(s, ↑) representado apenas por cores em uma grade 41 × 41 |
+
+### A17 · Manual de uso (Figuras 14–15 do TCC, Apêndice A)
+- **Figura 14** · `v0.4.1-manual-interface.png` · "Interface do Labirinto Playground (versão 0.4.1) com as áreas numeradas: (1) controles de execução, (2) seletor de algoritmo, (3) velocidade, (4) painel de configuração, (5) labirinto, (6) legenda e (7) painel de resultado"
+- **Figura 15** · `v0.4.1-manual-paineis.png` · "Painéis laterais com o Q-Learning selecionado: (a) parâmetros do labirinto e do algoritmo, (b) desenho e opções de exibição e (c) resultado, com o inspetor da tabela Q e o gráfico de recompensa"
+- **Fonte:** Elaborado pelos autores (2026).
 
 ---
 
