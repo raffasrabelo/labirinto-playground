@@ -42,6 +42,7 @@ Todo prompt segue seis blocos. Assim ele fica reproduzível e fácil de citar:
 | [P08](P08-correcao-interruptor-figuras.md) | 27/11/2026 | S4 | BUG-01, T-08 | Correção do interruptor (v0.4.1) e figuras da v0.3–v0.4 no TCC | Rafael |
 | [P09](P09-remocao-referencias.md) | 27/11/2026 | S4 | T-07 | Remoção de duas referências da discussão do TCC | Rafael |
 | [P10](P10-metodologia-estudo-de-caso.md) | 27/11/2026 | S4 | T-09 | Seção 3.1: classificação da pesquisa e estudo de caso | Rafael |
+| [P11](P11-tamanhos-e-classificacao.md) | 27/11/2026 | S4 | T-07, T-09 | Tamanhos de labirinto na discussão e coerência da seção 3.1 | Rafael |
 
 ## Sugestão de texto para o TCC (Metodologia)
 

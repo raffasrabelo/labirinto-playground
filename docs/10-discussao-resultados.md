@@ -54,12 +54,15 @@ por variação dos hiperparâmetros α, γ e ε, sem estudo com estudantes. A pl
 trabalho oferece recursos equivalentes — mapa de calor do valor aprendido, setas da política,
 inspetor dos quatro valores Q de cada estado, seleção da grandeza exibida em todas as células
 (V(s), Q(s, a) de cada ação ou número de visitas) e gráfico de recompensa por episódio —, mas
-em labirintos maiores (de 11 × 11 a 31 × 31) e com custos diferenciados. De forma análoga à
+em labirintos maiores, de 11 × 11 a 61 × 61 células, e com custos diferenciados. De forma análoga à
 validação por iteração de valor, a corretude foi verificada comparando a política aprendida
 com o caminho ótimo do Dijkstra: com γ = 0,99, o agente encontrou o caminho de menor custo
-nos 16 labirintos testados, enquanto, com γ = 0,95, não aprendeu o caminho em nenhum dos oito
+nos 16 labirintos de 11 × 11 e 21 × 21 com 15% de lama, enquanto, com γ = 0,95, não aprendeu o caminho em nenhum dos oito
 labirintos de 21 × 21. Esse comportamento, que motivou a adoção de γ = 0,995 como valor
-padrão, tornou-se ele próprio um experimento didático sobre o papel do fator de desconto.
+padrão, tornou-se ele próprio um experimento didático sobre o papel do fator de desconto. Nas grades
+maiores, porém, o treinamento exige mais episódios: em labirintos de 31 × 31, com os valores
+padrão e 200 episódios, o agente aprendeu o caminho de menor custo em apenas um de oito casos,
+e em todos os quatro testados com 500 episódios.
 
 Por outro lado, assim como o Q-Learning Lab, este trabalho ainda não mediu, com estudantes, o
 efeito da plataforma sobre a aprendizagem. Os resultados apresentados mostram que a ferramenta
