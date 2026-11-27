@@ -126,6 +126,22 @@ evidencie só a mudança de interface.
   (Figura N) permite acompanhar como os valores crescem à medida que o agente se aproxima
   do objetivo."
 
+### A14 · Layout antes e depois (1366 × 768)
+- **Arquivos:** `docs/img/layout-antes-1366x768.png` e `docs/img/layout-depois-1366x768.png`
+- **Legendas:** "Versão 0.3.1 em tela de 1366 × 768: as colunas laterais ultrapassam a janela e o labirinto sai da tela ao rolar a página" e "Versão 0.3.2 em tela de 1366 × 768: a interface cabe na janela, o labirinto permanece visível e as colunas laterais rolam de forma independente"
+- **Fonte:** Elaborado pelos autores (2026).
+- **Chamada:** "Após o uso em aula, a disposição da interface foi revista (Figuras N e N+1):
+  em telas de notebook e projetor, a página passou a caber na janela, mantendo o labirinto
+  sempre visível enquanto se ajustam os parâmetros."
+
+### A15 · v0.4: seletor "Visualizar no labirinto"
+- **Arquivos:** `docs/img/v0.4-visualizar-visits.png`, `docs/img/v0.4-visualizar-left.png`, `docs/img/v0.4-visualizar-41x41-up.png`
+- **Legendas:** "Versão 0.4: número de visitas do agente a cada estado, com o caminho aprendido destacado pela borda verde"; "Versão 0.4: valor de Q(s, ←) em todos os estados do labirinto"; "Versão 0.4: valor de Q(s, ↑) representado apenas por cores em uma grade 41 × 41"
+- **Fonte:** Elaborado pelos autores (2026).
+- **Chamada:** "Por sugestão do orientador, a versão 0.4 permite escolher qual valor
+  calculado o labirinto exibe em todas as células (Figura N): o valor do estado, o valor de
+  cada ação ou o número de visitas, que evidencia onde o agente concentrou a exploração."
+
 ---
 
 ## B. Metodologia e processo (Scrum)

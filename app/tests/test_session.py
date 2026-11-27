@@ -130,6 +130,24 @@ def test_modo_dos_valores_q_e_validado_e_nao_reinicia_o_treino():
     assert s.params["q_values"] == "all" and s.mode == RUNNING   # só muda a exibição
     s.command({"type": "set", "name": "q_values", "value": "tudo"})
     assert s.params["q_values"] == "all"
+    for mode in ("up", "right", "down", "left", "visits", "max", "off"):
+        s.command({"type": "set", "name": "q_values", "value": mode})
+        assert s.params["q_values"] == mode and s.mode == RUNNING
+
+
+def test_visitas_por_estado_somam_todos_os_passos_do_agente():
+    s = Session()
+    s.command({"type": "set", "name": "algorithm", "value": "qlearning"})
+    s.command({"type": "set", "name": "episodes", "value": 20})
+    s.command({"type": "set", "name": "speed", "value": 100_000})
+    s.command({"type": "play"})
+    run_to_end(s)
+    # cada passo do agente conta uma visita: total = eventos - 20 fins de episódio
+    # - células do caminho final - o evento done/fail
+    assert sum(s.run.visits.values()) == s.run.steps - 20 - len(s.run.path) - 1
+    assert s.run.visits[s.grid.start] >= 20          # todo episódio começa no início
+    s.hover_at(s.grid.start)
+    assert s.snapshot()["inspect"]["visits"] == s.run.visits[s.grid.start]
 
 
 def test_inspetor_mostra_a_celula_do_mouse_ou_a_do_agente():

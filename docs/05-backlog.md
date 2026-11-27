@@ -44,6 +44,8 @@ Status: ✅ pronto · 🔄 em andamento · ⏳ a fazer · ✂️ cortado.
 | US-20 | Como aluno, quero assistir ao agente treinado percorrer o labirinto | Must | S3 | ✅ percurso pela política aprendida ao fim do treino |
 | US-26 | Como professor, quero um roteiro de aula com experimentos verificados | Should | S3 | ✅ [09-roteiro-aula-qlearning.md](09-roteiro-aula-qlearning.md) |
 | US-27 | Como professor, quero ver os valores da tabela Q de cada estado (sugestão do orientador após a aula) | Should | S3 | ✅ v0.3.1: valores no labirinto + inspetor (P05) |
+| US-28 | Como aluno, quero ver o labirinto o tempo todo enquanto ajusto os parâmetros | Should | S3 | ✅ v0.3.2: layout de aplicativo (P06) |
+| US-29 | Como professor, quero escolher qual valor calculado (V(s), Q de cada ação, visitas) o labirinto mostra em todas as células (sugestão do orientador) | Should | S4 | ✅ v0.4 (P07) |
 
 ## Épico E6 · Validação e acabamento
 | ID | História de usuário | Prior. | Sprint | Status |
@@ -62,4 +64,5 @@ Status: ✅ pronto · 🔄 em andamento · ⏳ a fazer · ✂️ cortado.
 | T-04 | Atualizar as ações do workflow (avisos de Node.js 20 descontinuado) | S1 | ⏳ |
 | T-05 | Interface híbrida: controles em HTML/CSS/JS, labirinto em Pygame, ponte JSON (ADR-02, P03) | S0 | ✅ |
 | T-06 | Capturas de tela da v0.2 em alta resolução para o TCC e o README | S0 | ✅ 4 capturas + comparativo (docs/img) |
+| T-07 | Seção de discussão do TCC comparando com a literatura (sugestão do orientador) | S4 | ✅ [10-discussao-resultados.md](10-discussao-resultados.md) e .docx (P07) |
 | T-03 | Redesenhar só as células alteradas (se o FPS web for baixo) | S1 | ⏳ |

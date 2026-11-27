@@ -37,6 +37,8 @@ Todo prompt segue seis blocos. Assim ele fica reproduzível e fácil de citar:
 | [P03](P03-interface-hibrida.md) | 27/10/2026 | S0 | T-05, RNF08 | Interface híbrida: HTML/CSS + labirinto em Pygame | Rafael |
 | [P04](P04-q-learning.md) | 11/11/2026 | S3 | US-16 a US-20, US-26 | Implementação do Q-Learning (v0.3) e roteiro de aula | Rafael |
 | [P05](P05-valores-tabela-q.md) | 18/11/2026 | S3 | US-27 | Valores da tabela Q no labirinto e inspetor (sugestão do orientador) | Rafael |
+| [P06](P06-layout-aplicativo.md) | 18/11/2026 | S3 | US-28, RNF08 | Layout de aplicativo: labirinto sempre visível | Rafael |
+| [P07](P07-visualizar-valores.md) | 27/11/2026 | S4 | US-29, T-07 | Seletor "Visualizar no labirinto" e discussão do TCC (sugestões do orientador) | Rafael |
 
 ## Sugestão de texto para o TCC (Metodologia)
 

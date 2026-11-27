@@ -412,10 +412,22 @@ body[data-algorithm="qlearning"] [data-not="qlearning"] { display: none !importa
 .chart text { font-size: 9px; fill: var(--muted); }
 .metric .of { font-size: 14px; color: var(--muted); font-weight: 500; }
 
-/* opção de valores Q e aviso quando os números não cabem nas células */
-.qvalues { display: flex; width: 100%; margin: 6px 0 4px; }
-.qvalues button { flex: 1; justify-content: center; padding: 6px 4px; font-size: 13px; }
+/* seletor "Visualizar no labirinto" e aviso quando os números não cabem nas células */
+.select {
+    width: 100%;
+    margin: 6px 0 4px;
+    padding: 8px 10px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    font: inherit;
+    font-size: 13.5px;
+    color: var(--text);
+    cursor: pointer;
+}
 .field small.warn { color: #b54708; }
+.insp-visits { font-size: 12.5px; color: var(--text-2); }
+.insp-visits b { font-variant-numeric: tabular-nums; }
 
 /* inspetor: os 4 valores Q de uma célula, em cruz */
 .inspector {
@@ -513,6 +525,88 @@ kbd {
     font-size: 12px;
     color: var(--muted);
 }
+.footer a { color: var(--accent); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* seções secundárias recolhíveis (ex.: atalhos de teclado) */
+.collapsible { margin-top: 10px; padding-top: 14px; border-top: 1px solid var(--border); }
+.collapsible summary {
+    cursor: pointer;
+    list-style: none;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+.collapsible summary::-webkit-details-marker { display: none; }
+.collapsible summary::before { content: "▸ "; }
+.collapsible[open] summary::before { content: "▾ "; }
+.collapsible[open] summary { margin-bottom: 12px; }
+
+/* fora do modo "aplicativo", o labirinto acompanha a rolagem da página */
+.stage { position: sticky; top: 16px; }
+
+/* ------------------------------------------------- modo "aplicativo" --
+   Em telas de computador, tudo cabe na janela: o labirinto fica sempre visível
+   e ocupa o maior tamanho possível; as colunas laterais rolam por dentro. */
+@media (min-width: 1181px) and (min-height: 640px) {
+    body { height: 100vh; overflow: hidden; }
+
+    /* título e controles em uma única barra */
+    .appbar {
+        display: flex;
+        align-items: center;
+        gap: 12px 32px;
+        flex-wrap: wrap;
+        padding: 10px 24px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+    }
+    .appbar .topbar, .appbar .controlbar { padding: 0; border: 0; background: none; }
+    .appbar .controlbar { flex: 1; justify-content: flex-end; gap: 12px 32px; }
+    .appbar .ghost-link { display: none; }          /* o link vai para o rodapé */
+    .brand p { font-size: 12px; }
+
+    .layout {
+        min-height: 0;
+        max-width: 1680px;
+        padding: 16px 24px;
+        gap: 20px;
+        grid-template-rows: minmax(0, 1fr);
+        align-items: stretch;
+    }
+    .panel {
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border-strong) transparent;
+        /* sombras de rolagem: só aparecem na borda em que ainda há conteúdo escondido */
+        background:
+            linear-gradient(var(--surface) 30%, rgba(255, 255, 255, 0)) top / 100% 32px no-repeat local,
+            linear-gradient(rgba(255, 255, 255, 0), var(--surface) 70%) bottom / 100% 32px no-repeat local,
+            radial-gradient(farthest-side at 50% 0, rgba(16, 24, 40, .16), transparent) top / 100% 12px no-repeat scroll,
+            radial-gradient(farthest-side at 50% 100%, rgba(16, 24, 40, .16), transparent) bottom / 100% 12px no-repeat scroll,
+            var(--surface);
+    }
+    .stage { position: static; min-height: 0; justify-content: center; }
+    .metric { padding: 10px 12px; }
+}
+@media (min-width: 1600px) and (min-height: 640px) {
+    .layout { grid-template-columns: 320px minmax(0, 1fr) 320px; }
+}
+@media (min-width: 1181px) and (min-height: 640px) {
+    .metric-value { font-size: 20px; }
+    .footer { padding: 4px 24px 8px; font-size: 11px; }
+}
+/* o tamanho do labirinto segue o espaço da coluna central (largura e altura) */
+@supports (width: 1cqh) {
+    @media (min-width: 1181px) and (min-height: 640px) {
+        .stage { container-type: size; }
+        .board-card { width: min(100cqw, 100cqh - 76px); max-width: none; }
+    }
+}
 
 /* durante o carregamento os controles ficam inativos */
 body.is-loading .controlbar,
@@ -526,7 +620,7 @@ body.is-loading .panel { pointer-events: none; opacity: .55; }
 @media (max-width: 760px) {
     .topbar, .controlbar { padding: 12px 16px; }
     .layout { grid-template-columns: 1fr; padding: 16px; gap: 16px; }
-    .stage { order: -1; }  /* no celular, o labirinto vem primeiro */
+    .stage { order: -1; position: static; }  /* no celular, o labirinto vem primeiro (sem grudar) */
     .board-card { max-width: none; min-width: 0; }
     .ghost-link { display: none; }
     .controlbar { gap: 14px 24px; }

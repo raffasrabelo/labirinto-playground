@@ -5,6 +5,8 @@ legenda ficam no HTML (web/src/). O tabuleiro ocupa toda a superfície e se
 adapta ao tamanho dela (que no navegador acompanha o tamanho real do
 elemento na página, já multiplicado pela densidade de pixels da tela).
 """
+import math
+
 import pygame
 
 from algorithms.qlearning import ACTIONS, best_action
@@ -16,6 +18,17 @@ from . import theme as t
 # tamanho mínimo da célula, em pixels de TELA (CSS), para os números Q serem legíveis
 MIN_CELL_MAX_VALUE = 28   # um número por célula
 MIN_CELL_ALL_VALUES = 42  # quatro números por célula
+# modos do seletor que mostram o Q de uma única ação em todos os estados
+ACTION_MODES = {"up": 0, "right": 1, "down": 2, "left": 3}
+
+
+def compact(n: int) -> str:
+    """Contagem curta para caber na célula: 980, 1,2k, 15k."""
+    if n < 1000:
+        return str(n)
+    if n < 10_000:
+        return f"{n / 1000:.1f}k".replace(".", ",")
+    return f"{n // 1000}k"
 
 
 class BoardView:
@@ -82,20 +95,29 @@ class BoardView:
                         and cs >= 22)
         number_font = t.font(max(12, int(cs * 0.5)))
 
-        # Q-Learning: valor de cada estado = max Q(s, .), normalizado para o mapa de calor
+        # Q-Learning: o mapa de calor mostra o valor escolhido no seletor "Visualizar no labirinto"
         q = run.q if s.params["algorithm"] == "qlearning" else None
         heat, arrows, labels = {}, [], []
         css_cell = cs / self.dpr
         s.q_fit = {"max": css_cell >= MIN_CELL_MAX_VALUE, "all": css_cell >= MIN_CELL_ALL_VALUES}
         mode = s.params["q_values"]
-        if mode != "off" and not s.q_fit[mode]:
-            mode = "off"          # números ilegíveis nesta grade: a página avisa e oferece o inspetor
+        # números só quando legíveis; se não couberem, as cores continuam mostrando o valor
+        numbers = mode != "off" and s.q_fit["all" if mode == "all" else "max"]
+        show_arrows = False
         if q:
-            values = {c: max(qs) for c, qs in q.items()}
-            low, high = min(values.values()), max(values.values())
-            span = (high - low) or 1.0
-            heat = {c: (v - low) / span for c, v in values.items()}
-            show_arrows = s.params["show_policy"] and cs >= 12
+            if mode == "visits":
+                # escala logarítmica: poucas células perto do início concentram muitas visitas
+                values = {c: math.log1p(n) for c, n in run.visits.items()}
+            elif mode in ACTION_MODES:
+                a = ACTION_MODES[mode]
+                values = {c: qs[a] for c, qs in q.items()}
+            else:
+                values = {c: max(qs) for c, qs in q.items()}
+            if values:
+                low, high = min(values.values()), max(values.values())
+                span = (high - low) or 1.0
+                heat = {c: (v - low) / span for c, v in values.items()}
+            show_arrows = s.params["show_policy"] and cs >= 12 and mode in ("off", "max")
 
         for y in range(grid.rows):
             for x in range(grid.cols):
@@ -107,7 +129,12 @@ class BoardView:
                     continue
                 state = run.cells.get(cell)
                 inner = rect.inflate(-gap, -gap)
-                if state:
+                # com um valor calculado selecionado, a cor da célula mostra o valor e o
+                # caminho final vira só uma borda verde (senão o verde esconderia os valores)
+                path_outline = state == "path" and mode != "off" and cell in heat
+                if path_outline:
+                    fill = t.mix(t.HEAT_LOW, t.HEAT_HIGH, heat[cell])
+                elif state:
                     fill = t.STATE_COLORS[state]
                 elif cell in heat:
                     fill = t.mix(t.HEAT_LOW, t.HEAT_HIGH, heat[cell])
@@ -117,31 +144,42 @@ class BoardView:
                     # lama: anel cor de areia em volta da cor do estado
                     pygame.draw.rect(surface, t.CELL_MUD, inner)
                     # com números Q na célula, o anel de lama fica fino para não atrapalhar a leitura
-                    ring = max(2, cs // (14 if mode != "off" and cell in heat else 5))
+                    ring = max(2, cs // (14 if numbers and cell in heat else 5))
                     inner = inner.inflate(-2 * ring, -2 * ring)
                     color = fill or t.CELL_MUD
                 else:
                     color = fill or t.CELL_EMPTY
                 pygame.draw.rect(surface, color, inner, border_radius=max(0, cs // 8))
+                if path_outline:
+                    pygame.draw.rect(surface, t.STATE_COLORS["path"], rect.inflate(-gap, -gap),
+                                     max(2, cs // 9), border_radius=max(0, cs // 8))
                 if show_numbers and cell in run.dist and state != "path":
                     img = number_font.render(str(run.dist[cell]), True, t.TEXT)
                     surface.blit(img, img.get_rect(center=rect.center))
-                if q and cell in q and cell != grid.goal:
-                    qs = q[cell]
-                    explored = max(qs) != min(qs)
-                    light = heat[cell] > 0.55 or state == "path"
-                    if show_arrows and explored and mode != "all":   # no modo "all" o sublinhado marca a melhor ação
+                if q and cell in heat and cell != grid.goal:
+                    qs = q.get(cell)
+                    light = heat[cell] > 0.55 or (state == "path" and not path_outline)
+                    if show_arrows and qs and max(qs) != min(qs):
                         arrows.append((rect.center, best_action(qs), light))
-                    if mode != "off":
-                        labels.append((rect, qs, light, explored))
+                    if numbers:
+                        labels.append((rect, cell, light))
 
         # com números no centro, a seta vira um triângulo pequeno junto à borda
-        arrow_scale, arrow_offset = {"off": (1.0, 0.0), "max": (0.5, 0.36), "all": (1.0, 0.0)}[mode]
+        arrow_scale, arrow_offset = (0.5, 0.36) if numbers else (1.0, 0.0)
         for center, action, light in arrows:
             self._draw_arrow(surface, center, action, t.WHITE if light else t.ARROW_DARK,
                              arrow_scale, arrow_offset)
-        for rect, qs, light, explored in labels:
-            self._draw_q_values(surface, rect, qs, mode, t.WHITE if light else t.TEXT, explored)
+        for rect, cell, light in labels:
+            color = t.WHITE if light else t.TEXT
+            if mode == "all":
+                qs = q[cell]
+                self._draw_q_values(surface, rect, qs, color, max(qs) != min(qs))
+            elif mode == "visits":
+                self._draw_label(surface, rect, compact(run.visits.get(cell, 0)), color)
+            elif mode in ACTION_MODES:
+                self._draw_label(surface, rect, f"{q[cell][ACTION_MODES[mode]]:.0f}", color)
+            else:
+                self._draw_label(surface, rect, f"{max(q[cell]):.0f}", color)
 
         radius = max(2, cs // 4)
         for cell, color in ((grid.start, t.START), (grid.goal, t.GOAL)):
@@ -158,14 +196,14 @@ class BoardView:
                 pygame.draw.rect(surface, t.CURRENT, self._rect(run.current), max(2, cs // 7),
                                  border_radius=radius)
 
-    def _draw_q_values(self, surface, rect, qs, mode, color, explored):
-        """Valores da tabela Q da célula: o maior (centro) ou os 4 (um em cada borda)."""
+    def _draw_label(self, surface, rect, text, color):
+        """Um número no centro da célula (fonte = metade da célula: "-12" ocupa ~48% da largura)."""
+        img = self._text(text, max(10, int(self.cell * 0.5)), color)
+        surface.blit(img, img.get_rect(center=rect.center))
+
+    def _draw_q_values(self, surface, rect, qs, color, explored):
+        """Os 4 valores Q da célula, um em cada borda, com a melhor ação sublinhada."""
         cs = self.cell
-        if mode == "max":
-            # fonte = metade da célula: "-12" ocupa ~48% da largura
-            img = self._text(f"{max(qs):.0f}", max(10, int(cs * 0.5)), color)
-            surface.blit(img, img.get_rect(center=rect.center))
-            return
         # 4 valores em cruz: cima/baixo centralizados, esquerda/direita na linha do meio.
         # fonte = 0,36 da célula: "-12" ocupa ~34% da largura e cada linha ~24% da altura
         best = best_action(qs) if explored else None

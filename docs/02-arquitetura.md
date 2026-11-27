@@ -64,6 +64,16 @@ quadrantChart
   porque o código da página é pequeno (~200 linhas) e assim não é preciso Node.js nem etapa de
   compilação. TypeScript pode ser adotado se a interface crescer.
 
+### ADR-03 · Layout de aplicativo: labirinto sempre visível (v0.3.2, 18/11)
+**Contexto.** Com o Q-Learning, as colunas laterais passaram de 1.600 px de altura; em telas
+de 1366 × 768 era preciso rolar a página para ver os controles, e o labirinto saía da tela.
+**Decisão.** Em telas de computador (≥ 1181 × 640 px) a página ocupa exatamente a janela:
+labirinto fixo no centro, dimensionado por *container queries*, e colunas laterais com
+rolagem própria e sombras de rolagem. Título e controles foram unidos em uma barra. Em telas
+intermediárias, o labirinto fica fixo no topo durante a rolagem (*position: sticky*).
+**Consequência.** Em 1366 × 768 a página deixou de rolar e o labirinto cresceu de 482 para
+521 px; em 1920 × 1080, de 734 para 833 px (medições em [P06](prompts/P06-layout-aplicativo.md)).
+
 ## Visão em camadas
 
 ```mermaid
@@ -376,7 +386,7 @@ stateDiagram-v2
 
 Novos parâmetros aceitos por `{"type": "set"}`: `alpha`, `gamma`, `epsilon`, `decay`,
 `episodes`, `goal_reward`, `wall_penalty`, `show_policy` e `q_values` (`off` | `max` | `all`,
-v0.3.1). Novos campos do estado:
+v0.3.1; `up` | `right` | `down` | `left` | `visits`, v0.4). Novos campos do estado:
 `metrics.episode`, `metrics.episodes`, `metrics.epsilon`, `metrics.episode_steps`,
 `metrics.last_reward`, `metrics.reached` e a lista `rewards`.
 

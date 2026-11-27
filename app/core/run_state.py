@@ -36,6 +36,7 @@ class RunState:
         self.episode_steps = 0
         self.rewards: list = []    # recompensa total de cada episódio
         self.reached = 0           # episódios que chegaram ao objetivo
+        self.visits: dict = {}     # célula -> quantas vezes o agente esteve nela
 
     def _set(self, cell, state: str) -> None:
         old = self.cells.get(cell)
@@ -49,6 +50,7 @@ class RunState:
         kind = ev.kind
         if kind == AGENT:                         # o mais frequente, por isso primeiro
             self.current = ev.cell
+            self.visits[ev.cell] = self.visits.get(ev.cell, 0) + 1
             if ev.data:
                 self.q = ev.data["q"]
                 self.episode = ev.data["episode"]

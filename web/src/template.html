@@ -86,6 +86,7 @@ function custom_postrun() {}
 
 <body class="is-loading" data-algorithm="dijkstra" data-mode="idle">
 
+<div class="appbar">
 <header class="topbar">
     <div class="brand">
         <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
@@ -135,6 +136,7 @@ function custom_postrun() {}
         <input type="range" id="speed" min="0" max="100" value="43">
     </div>
 </section>
+</div>
 
 <main class="layout">
     <aside class="panel" aria-label="Configuração do labirinto">
@@ -226,13 +228,22 @@ function custom_postrun() {}
             Mostrar setas da política
         </label>
         <div class="field" data-only="qlearning">
-            <label>Valores da tabela Q no labirinto</label>
-            <div class="segmented qvalues" id="q_values" role="radiogroup" aria-label="Valores da tabela Q no labirinto">
-                <button role="radio" data-value="off">Nenhum</button>
-                <button role="radio" data-value="max">Melhor</button>
-                <button role="radio" data-value="all">4 ações</button>
-            </div>
-            <small id="q-values-help">“Melhor” mostra o maior Q de cada célula; “4 ações” mostra Q(↑), Q(→), Q(↓) e Q(←), com a melhor sublinhada.</small>
+            <label for="q_values">Visualizar no labirinto</label>
+            <select id="q_values" class="select">
+                <option value="off">Mapa de calor e setas</option>
+                <optgroup label="Valores calculados">
+                    <option value="max">V(s): valor do estado (maior Q)</option>
+                    <option value="all">Q(s, a): as 4 ações em cada célula</option>
+                    <option value="up">Q(s, ↑): valor de ir para cima</option>
+                    <option value="right">Q(s, →): valor de ir para a direita</option>
+                    <option value="down">Q(s, ↓): valor de ir para baixo</option>
+                    <option value="left">Q(s, ←): valor de ir para a esquerda</option>
+                </optgroup>
+                <optgroup label="Exploração">
+                    <option value="visits">Visitas: quantas vezes o agente passou</option>
+                </optgroup>
+            </select>
+            <small id="q-values-help">Todas as células passam a mostrar o valor escolhido: a cor indica de baixo a alto e o número aparece quando cabe na célula.</small>
             <small class="warn" id="q-values-warn" hidden></small>
         </div>
         <p class="hint" data-only="backtracking">Sem opções de exibição para este algoritmo.</p>
@@ -262,7 +273,7 @@ function custom_postrun() {}
             <li data-not="qlearning"><i class="swatch sw-visited"></i>Expandida</li>
             <li data-only="backtracking"><i class="swatch sw-dead"></i>Retrocesso</li>
             <li data-not="qlearning"><i class="swatch sw-current"></i>Atual</li>
-            <li data-only="qlearning"><i class="swatch sw-heat"></i>Valor aprendido (baixo → alto)</li>
+            <li data-only="qlearning"><i class="swatch sw-heat"></i><span id="heat-legend">Valor aprendido V(s) (baixo → alto)</span></li>
             <li data-only="qlearning"><i class="swatch sw-agent"></i>Agente</li>
             <li data-only="qlearning"><span class="arrow-icon" aria-hidden="true">▶</span>Melhor ação</li>
             <li><i class="swatch sw-path"></i>Caminho final</li>
@@ -312,12 +323,6 @@ function custom_postrun() {}
             </div>
         </div>
 
-        <figure class="chart" data-only="qlearning">
-            <figcaption>Recompensa por episódio</figcaption>
-            <svg id="reward-chart" viewBox="0 0 260 120" role="img" aria-label="Gráfico da recompensa total em cada episódio"></svg>
-            <small>Sobe à medida que o agente aprende um caminho melhor.</small>
-        </figure>
-
         <section class="inspector" data-only="qlearning" aria-live="polite">
             <div class="inspector-head">
                 <strong>Tabela Q da célula</strong>
@@ -330,24 +335,34 @@ function custom_postrun() {}
                 <span class="q q-right" data-a="1"><b>→</b> <span>–</span></span>
                 <span class="q q-down" data-a="2"><b>↓</b> <span>–</span></span>
             </div>
+            <div class="insp-visits">Visitas do agente nesta célula: <b id="insp-visits">–</b></div>
             <small id="insp-note">Passe o mouse sobre uma célula do labirinto.</small>
         </section>
+
+        <figure class="chart" data-only="qlearning">
+            <figcaption>Recompensa por episódio</figcaption>
+            <svg id="reward-chart" viewBox="0 0 260 120" role="img" aria-label="Gráfico da recompensa total em cada episódio"></svg>
+            <small>Sobe à medida que o agente aprende um caminho melhor.</small>
+        </figure>
 
         <h2>Como funciona</h2>
         <p class="description" id="description"></p>
 
-        <h2>Atalhos</h2>
-        <dl class="shortcuts">
-            <div><dt><kbd>Espaço</kbd></dt><dd>executar / pausar</dd></div>
-            <div><dt><kbd>N</kbd></dt><dd>um passo</dd></div>
-            <div><dt><kbd>R</kbd></dt><dd>reiniciar</dd></div>
-            <div><dt><kbd>G</kbd></dt><dd>novo labirinto</dd></div>
-        </dl>
+        <details class="collapsible">
+            <summary>Atalhos de teclado</summary>
+            <dl class="shortcuts">
+                <div><dt><kbd>Espaço</kbd></dt><dd>executar / pausar</dd></div>
+                <div><dt><kbd>N</kbd></dt><dd>um passo</dd></div>
+                <div><dt><kbd>R</kbd></dt><dd>reiniciar</dd></div>
+                <div><dt><kbd>G</kbd></dt><dd>novo labirinto</dd></div>
+            </dl>
+        </details>
     </aside>
 </main>
 
 <footer class="footer">
-    TCC · Sistemas de Informação · IFSULDEMINAS, Campus Machado · v0.3.1
+    TCC · Sistemas de Informação · IFSULDEMINAS, Campus Machado · v0.4 ·
+    <a href="https://github.com/raffasrabelo/labirinto-playground" target="_blank" rel="noopener">código-fonte</a>
 </footer>
 
 <!-- elementos esperados pelo runtime do pygbag -->

@@ -6,9 +6,9 @@ resolvendo labirintos, inspirada no [TensorFlow Playground](https://playground.t
 TCC · Sistemas de Informação · IFSULDEMINAS, Campus Machado
 Autores: Arielce José Pereira Junior e Rafael da Silva Rabelo · Orientador: Prof. Matheus Eloy Franco
 
-**Versão atual:** v0.3.1: Backtracking, Dijkstra e **Q-Learning** (com os valores da tabela Q visíveis no labirinto), interface web (HTML/CSS) com o labirinto em Pygame.
+**Versão atual:** v0.4: Backtracking, Dijkstra e **Q-Learning** (com os valores da tabela Q visíveis no labirinto), interface web (HTML/CSS) com o labirinto em Pygame.
 
-![Labirinto Playground v0.2: Dijkstra concluído](docs/img/v0.2-dijkstra-concluido.png)
+![Labirinto Playground v0.3.2 em tela de notebook](docs/img/layout-depois-1366x768.png)
 
 ### ▶ [Abrir no navegador](https://raffasrabelo.github.io/labirinto-playground/)
 `https://raffasrabelo.github.io/labirinto-playground/` (leva alguns segundos para carregar; recomendado em computador)
@@ -85,6 +85,7 @@ roda os testes, gera o build web e publica no GitHub Pages. Se um teste falhar, 
 | [07 · Diagramas](docs/07-diagramas.md) | Índice dos 29 diagramas, tipos e sugestão de uso no TCC |
 | [08 · Legendas das figuras](docs/08-legendas-das-figuras.md) | Legenda, fonte e frase de chamada (ABNT) de todas as capturas e diagramas |
 | [09 · Roteiro de aula: Q-Learning](docs/09-roteiro-aula-qlearning.md) | Experimentos verificados para uso em sala e o que registrar para o TCC |
+| [10 · Discussão dos resultados](docs/10-discussao-resultados.md) | Texto da seção 4.1 do TCC, referências ABNT e verificação de cada uma |
 | [Sprints](docs/sprints/) | Planejamento, review, feedback e retrospectiva de cada sprint |
 | [Prompts](docs/prompts/) | Registro e catálogo de prompts de IA |
 

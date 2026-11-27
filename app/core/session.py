@@ -21,8 +21,10 @@ from .run_state import RunState
 IDLE, RUNNING, PAUSED, FINISHED = "idle", "running", "paused", "finished"
 
 BRUSHES = {"wall": WALL, "mud": MUD, "erase": EMPTY}
-# valores da tabela Q desenhados no labirinto: nenhum, o melhor de cada célula, ou as 4 ações
-Q_VALUE_MODES = ("off", "max", "all")
+# o que o labirinto mostra no Q-Learning (sugestões do orientador, v0.3.1 e v0.4):
+#   off = mapa de calor de V(s) e setas | max = V(s) com números | all = os 4 Q de cada célula
+#   up/right/down/left = Q(s, a) de uma ação em todos os estados | visits = visitas por estado
+Q_VALUE_MODES = ("off", "max", "all", "up", "right", "down", "left", "visits")
 
 # nome do parâmetro -> (mínimo, máximo)
 LIMITS = {
@@ -245,6 +247,7 @@ class Session:
             "goal": cell == self.grid.goal,
             "q": [round(v, 1) for v in qs] if qs else None,
             "best": best_action(qs) if explored else None,
+            "visits": self.run.visits.get(cell, 0),
         }
 
     # ------------------------------------------------------------- retrato --

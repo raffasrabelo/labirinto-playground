@@ -97,8 +97,10 @@
 
         setChecked("#algorithm", p.algorithm);
         setChecked("#brush", p.brush);
-        setChecked("#q_values", p.q_values);
+        if (document.activeElement !== $("#q_values")) $("#q_values").value = p.q_values;
         renderQValuesWarning(p.q_values, state.q_fit);
+        const legend = HEAT_LEGEND[p.q_values] || HEAT_LEGEND.off;
+        if ($("#heat-legend").textContent !== legend) $("#heat-legend").textContent = legend;
         renderInspector(state.inspect);
 
         for (const name of RANGE_PARAMS) {
@@ -146,21 +148,35 @@
     // ----------------------------- valores e inspetor da tabela Q --
     const dec1 = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
     const Q_WARN = {
-        max: "Nesta grade os números ficariam pequenos demais. Use uma grade menor ou o inspetor ao lado.",
-        all: "Os 4 valores só cabem em grades pequenas (11 × 11 ou 13 × 13). Use “Melhor” ou o inspetor ao lado.",
+        one: "Nesta grade os números não cabem nas células: as cores continuam mostrando o valor escolhido. Passe o mouse para ver os números no inspetor.",
+        all: "Os 4 valores só cabem em grades pequenas (11 × 11 ou 13 × 13). Use V(s) ou uma única ação, ou o inspetor ao lado.",
+    };
+    // texto da legenda do mapa de calor para cada modo de visualização
+    const HEAT_LEGEND = {
+        off: "Valor aprendido V(s) (baixo → alto)",
+        max: "V(s) = maior Q (baixo → alto)",
+        all: "V(s) = maior Q (baixo → alto)",
+        up: "Q(s, ↑) (baixo → alto)",
+        right: "Q(s, →) (baixo → alto)",
+        down: "Q(s, ↓) (baixo → alto)",
+        left: "Q(s, ←) (baixo → alto)",
+        visits: "Visitas (poucas → muitas)",
     };
 
     function renderQValuesWarning(mode, fit) {
         const warn = $("#q-values-warn");
-        const show = mode !== "off" && Boolean(fit) && !fit[mode];
+        const key = mode === "all" ? "all" : "max";
+        const show = mode !== "off" && Boolean(fit) && !fit[key];
+        const text = mode === "all" ? Q_WARN.all : Q_WARN.one;
         warn.hidden = !show;
-        if (show && warn.textContent !== Q_WARN[mode]) warn.textContent = Q_WARN[mode];
+        if (show && warn.textContent !== text) warn.textContent = text;
     }
 
     function renderInspector(info) {
         const cells = $$("#insp-cross .q");
         const note = $("#insp-note");
         let noteText = "Passe o mouse sobre uma célula do labirinto.";
+        $("#insp-visits").textContent = info ? fmt.format(info.visits || 0) : "–";
         if (!info) {
             $("#insp-cell").textContent = "–";
             cells.forEach((el) => { el.classList.remove("best"); el.lastElementChild.textContent = "–"; });
@@ -220,7 +236,11 @@
     $("#btn-new").addEventListener("click", () => send({ type: "new_maze" }));
     $("#btn-clear").addEventListener("click", () => send({ type: "clear" }));
 
-    for (const group of ["algorithm", "brush", "q_values"]) {
+    $("#q_values").addEventListener("change", (e) => {
+        send({ type: "set", name: "q_values", value: e.target.value });
+    });
+
+    for (const group of ["algorithm", "brush"]) {
         $$(`#${group} button`).forEach((b) => {
             b.addEventListener("click", () => {
                 send({ type: "set", name: group, value: b.dataset.value });
@@ -261,7 +281,7 @@
 
     // atalhos de teclado (ignorados enquanto se digita em um campo)
     const KEYS = { " ": "play", n: "step", N: "step", r: "reset", R: "reset", g: "new_maze", G: "new_maze" };
-    const isTyping = (t) => t instanceof Element && t.matches("input[type=number], input[type=text]");
+    const isTyping = (t) => t instanceof Element && t.matches("input[type=number], input[type=text], select");
     document.addEventListener("keydown", (e) => {
         if (isTyping(e.target) || e.ctrlKey || e.metaKey || e.altKey || !(e.key in KEYS)) return;
         e.preventDefault();
