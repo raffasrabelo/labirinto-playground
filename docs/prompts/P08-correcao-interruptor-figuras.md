@@ -82,4 +82,7 @@ foram inseridas no fim do capítulo de Resultados, antes de "4.1 Discussão":
 
 ## Evidências
 - Arquivo do TCC: `TCC_Arielce_Rafael_figuras-v0.3-v0.4.docx` (na pasta do TCC, fora do repositório)
-- Commit e deploy: *(preencher após a publicação)*
+- Commit `b890649` · deploy: <https://github.com/raffasrabelo/labirinto-playground/actions/runs/46041352248> (test, build e deploy ✅)
+- Site público testado após o deploy (Edge): rodapé v0.4.1; mesmo teste dos interruptores nos
+  4 tamanhos de tela, com e sem a proteção do JS, com os mesmos resultados do teste local
+  (nenhuma rolagem no modo aplicativo); nenhum erro de JavaScript.
