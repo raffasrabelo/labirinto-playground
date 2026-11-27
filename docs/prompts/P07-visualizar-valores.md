@@ -60,6 +60,8 @@ eles faziam.
 - Inserido no .docx do TCC (versão do Drive de 27/11, 16:22), com a formatação do próprio
   documento, e 8 referências novas no padrão já usado na lista. O arquivo passou na validação
   do formato.
+- **Atualização (P09):** a equipe retirou depois Hundhausen, Douglas e Stasko e o QUBE (Myers,
+  Xie e Zhu); ver [P09](P09-remocao-referencias.md).
 - **Não citado:** o artigo do TBC-Grafos (ICECE 2007), porque o arquivo não pôde ser lido para
   conferência.
 

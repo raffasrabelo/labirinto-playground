@@ -13,6 +13,10 @@ Para a fonte, use um parágrafo logo abaixo da imagem, em fonte menor (10 pt).
 > As figuras estão em ordem temática, não na ordem em que vão aparecer no TCC. A coluna
 > "Seção sugerida" do [índice de diagramas](07-diagramas.md) ajuda a posicioná-las.
 
+**Já inseridas no TCC** (versão de 27/11/2026): Figura 1 = B2; Figuras 2–4 = A1–A3;
+Figuras 5–8 = A4–A7; Figuras 9–13 = A9–A13; Figuras 14–15 = A14; Figuras 16–18 = A15
+(detalhes em [P08](prompts/P08-correcao-interruptor-figuras.md)).
+
 ---
 
 ## A. Capturas de tela da plataforma

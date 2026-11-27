@@ -65,4 +65,10 @@ Status: ✅ pronto · 🔄 em andamento · ⏳ a fazer · ✂️ cortado.
 | T-05 | Interface híbrida: controles em HTML/CSS/JS, labirinto em Pygame, ponte JSON (ADR-02, P03) | S0 | ✅ |
 | T-06 | Capturas de tela da v0.2 em alta resolução para o TCC e o README | S0 | ✅ 4 capturas + comparativo (docs/img) |
 | T-07 | Seção de discussão do TCC comparando com a literatura (sugestão do orientador) | S4 | ✅ [10-discussao-resultados.md](10-discussao-resultados.md) e .docx (P07) |
+| T-08 | Inserir as figuras da v0.3–v0.4 no TCC, com legenda, fonte e Lista de Figuras | S4 | ✅ Figuras 9–18 (P08) |
 | T-03 | Redesenhar só as células alteradas (se o FPS web for baixo) | S1 | ⏳ |
+
+## Defeitos
+| ID | Defeito | Sprint | Status |
+|---|---|---|---|
+| BUG-01 | Clicar em um interruptor ("Mostrar setas da política", "Mostrar distâncias") rolava a página e cortava a tela ao meio no modo aplicativo | S4 | ✅ v0.4.1 (P08) |

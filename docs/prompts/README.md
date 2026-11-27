@@ -39,6 +39,8 @@ Todo prompt segue seis blocos. Assim ele fica reproduzível e fácil de citar:
 | [P05](P05-valores-tabela-q.md) | 18/11/2026 | S3 | US-27 | Valores da tabela Q no labirinto e inspetor (sugestão do orientador) | Rafael |
 | [P06](P06-layout-aplicativo.md) | 18/11/2026 | S3 | US-28, RNF08 | Layout de aplicativo: labirinto sempre visível | Rafael |
 | [P07](P07-visualizar-valores.md) | 27/11/2026 | S4 | US-29, T-07 | Seletor "Visualizar no labirinto" e discussão do TCC (sugestões do orientador) | Rafael |
+| [P08](P08-correcao-interruptor-figuras.md) | 27/11/2026 | S4 | BUG-01, T-08 | Correção do interruptor (v0.4.1) e figuras da v0.3–v0.4 no TCC | Rafael |
+| [P09](P09-remocao-referencias.md) | 27/11/2026 | S4 | T-07 | Remoção de duas referências da discussão do TCC | Rafael |
 
 ## Sugestão de texto para o TCC (Metodologia)
 

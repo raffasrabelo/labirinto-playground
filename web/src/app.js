@@ -306,4 +306,15 @@
     $("#canvas").addEventListener("mouseleave", () => send({ type: "hover_clear" }));
     window.addEventListener("resize", reportSize);
     reportSize();
+
+    // --------------------------------- modo aplicativo nunca rola a página --
+    // No modo aplicativo só as colunas rolam. Se o navegador rolar a página
+    // (por exemplo, para mostrar um elemento focado), ela volta ao topo.
+    const appMode = window.matchMedia("(min-width: 1181px) and (min-height: 640px)");
+    document.addEventListener("scroll", () => {
+        if (appMode.matches && (window.scrollY || document.body.scrollTop)) {
+            window.scrollTo(0, 0);
+            document.body.scrollTop = 0;
+        }
+    }, { passive: true });
 })();
