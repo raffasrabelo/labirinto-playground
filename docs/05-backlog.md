@@ -66,6 +66,7 @@ Status: ✅ pronto · 🔄 em andamento · ⏳ a fazer · ✂️ cortado.
 | T-06 | Capturas de tela da v0.2 em alta resolução para o TCC e o README | S0 | ✅ 4 capturas + comparativo (docs/img) |
 | T-07 | Seção de discussão do TCC comparando com a literatura (sugestão do orientador) | S4 | ✅ [10-discussao-resultados.md](10-discussao-resultados.md) e .docx (P07) |
 | T-08 | Inserir as figuras da v0.3–v0.4 no TCC, com legenda, fonte e Lista de Figuras | S4 | ✅ Figuras 9–18 (P08) |
+| T-09 | Adequar a seção 3.1 (classificação da pesquisa e estudo de caso) com Gil (2002) e Ventura (2007) | S4 | ✅ (P10) |
 | T-03 | Redesenhar só as células alteradas (se o FPS web for baixo) | S1 | ⏳ |
 
 ## Defeitos
