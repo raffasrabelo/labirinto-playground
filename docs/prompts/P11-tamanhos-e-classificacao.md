@@ -52,6 +52,14 @@ cada critério:
   discussão (ainda não houve avaliação com estudantes). Gil (2002, p. 54) observa que os
   resultados de estudos de caso costumam ser apresentados como hipóteses, não como conclusões.
 
+## Parte 3 · Citação de Gil na "pesquisa aplicada" (aprovada pela equipe)
+
+Prompt de continuação: `Sim, citar`. A frase passou a ser: "Quanto à sua natureza, trata-se
+de uma pesquisa aplicada, isto é, motivada por razões de ordem prática (GIL, 2002, p. 17), uma
+vez que busca gerar conhecimentos para a solução de um problema prático e específico [...]".
+A expressão "razões de ordem prática" é a usada por Gil na p. 17. A referência já constava da
+lista.
+
 ## Revisão da equipe
 - Aceito:
 - Alterado:
