@@ -61,4 +61,6 @@ após a mudança, com os mesmos resultados e nenhum erro de JavaScript.
 
 ## Evidências
 - Capturas: `docs/img/layout-antes-1366x768.png` e `docs/img/layout-depois-1366x768.png`
-- Commit / deploy: *(preencher após a publicação)*
+- Publicado junto com a v0.4 · commit `ac77f21` · deploy: <https://github.com/raffasrabelo/labirinto-playground/actions/runs/46033707798>
+- Site público medido após o deploy: 1366 × 768 → página de 768 px, labirinto de 521 px;
+  1440 × 900 → 900 px, 653 px; 1920 × 1080 → 1.080 px, 833 px (iguais ao teste local).

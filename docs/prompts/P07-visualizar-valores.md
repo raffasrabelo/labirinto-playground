@@ -71,4 +71,7 @@ eles faziam.
 ## Evidências
 - Capturas: `docs/img/v0.4-visualizar-visits.png`, `docs/img/v0.4-visualizar-left.png`, `docs/img/v0.4-visualizar-41x41-up.png`
 - Arquivo do TCC: `TCC_Arielce_Rafael_discussao.docx` (na pasta do TCC, fora do repositório)
-- Commit / deploy: *(preencher após a publicação)*
+- Commit: `ac77f21` · deploy: <https://github.com/raffasrabelo/labirinto-playground/actions/runs/46033707798> (test, build e deploy ✅)
+- Site público testado após o deploy (Edge): rodapé v0.4; os 8 modos do seletor, legenda,
+  aviso em 41 × 41, inspetor com visitas e atalhos com os mesmos resultados do teste local;
+  nenhum erro de JavaScript.
