@@ -76,6 +76,11 @@ intermediárias, o labirinto fica fixo no topo durante a rolagem (*position: sti
 
 ## Visão em camadas
 
+**Diagrama de módulos (Figura 1 do TCC):** [modulos-da-aplicacao.svg](img/modulos-da-aplicacao.svg).
+Mostra os mesmos módulos do fluxograma abaixo, arquivo por arquivo, com a função de cada um.
+
+![Módulos do Labirinto Playground](img/modulos-da-aplicacao.png)
+
 ```mermaid
 flowchart TB
     subgraph Pagina["Página web (web/src/)"]

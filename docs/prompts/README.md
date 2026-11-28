@@ -44,6 +44,7 @@ Todo prompt segue seis blocos. Assim ele fica reproduzível e fácil de citar:
 | [P10](P10-metodologia-estudo-de-caso.md) | 27/11/2026 | S4 | T-09 | Seção 3.1: classificação da pesquisa e estudo de caso | Rafael |
 | [P11](P11-tamanhos-e-classificacao.md) | 27/11/2026 | S4 | T-07, T-09 | Tamanhos de labirinto na discussão e coerência da seção 3.1 | Rafael |
 | [P12](P12-figuras-atuais-e-manual.md) | 27/11/2026 | S4 | T-10, T-11 | Figuras só da versão atual e manual de uso (Apêndice A) | Rafael |
+| [P13](P13-diagrama-de-modulos.md) | 27/11/2026 | S4 | T-12 | Diagrama de módulos no lugar da Figura 1 (comentário do orientador) | Rafael |
 
 ## Sugestão de texto para o TCC (Metodologia)
 

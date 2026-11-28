@@ -69,6 +69,7 @@ Status: ✅ pronto · 🔄 em andamento · ⏳ a fazer · ✂️ cortado.
 | T-09 | Adequar a seção 3.1 (classificação da pesquisa e estudo de caso) com Gil (2002) e Ventura (2007) | S4 | ✅ (P10) |
 | T-10 | Trocar as figuras do TCC por capturas da versão atual (v0.4.1) | S4 | ✅ Figuras 2–13 (P12) |
 | T-11 | Manual de uso da aplicação, por algoritmo (Apêndice A do TCC) | S4 | ✅ [11-manual-de-uso.md](11-manual-de-uso.md) (P12) |
+| T-12 | Trocar a Figura 1 do TCC (ciclo do Scrum) pelo diagrama de módulos da aplicação (comentário do orientador) | S4 | ✅ [modulos-da-aplicacao.svg](img/modulos-da-aplicacao.svg) (P13) |
 | T-03 | Redesenhar só as células alteradas (se o FPS web for baixo) | S1 | ⏳ |
 
 ## Defeitos

@@ -13,7 +13,8 @@ Para a fonte, use um parágrafo logo abaixo da imagem, em fonte menor (10 pt).
 > As figuras estão em ordem temática, não na ordem em que vão aparecer no TCC. A coluna
 > "Seção sugerida" do [índice de diagramas](07-diagramas.md) ajuda a posicioná-las.
 
-**No TCC (versão de 27/11/2026, P12):** só imagens da versão atual. Figura 1 = B2; Figuras 2–13 =
+**No TCC (versão de 27/11/2026, P13):** só imagens da versão atual. Figura 1 = D0 (módulos da
+aplicação, no fim da seção 3.1, no lugar do ciclo do Scrum, a pedido do orientador); Figuras 2–13 =
 A16 (capturas da v0.4.1, nos Resultados); Figuras 14–15 = A17 (manual de uso, Apêndice A). As
 capturas A1–A15, de versões anteriores, ficam aqui como registro do histórico do projeto.
 
@@ -265,6 +266,13 @@ Fonte de todas: Elaborado pelos autores (2026). Capturadas no site publicado, em
 ---
 
 ## D. Arquitetura
+
+### D0 · Módulos da aplicação (Figura 1 do TCC)
+- **Arquivo:** `docs/img/modulos-da-aplicacao.png` (fonte editável: `modulos-da-aplicacao.svg`)
+- **Legenda:** Módulos do Labirinto Playground e comunicação entre eles
+- **Fonte:** Elaborado pelos autores (2026).
+- **Chamada:** "A plataforma resultante desse processo organiza-se em módulos com
+  responsabilidades bem delimitadas, apresentados na Figura 1."
 
 ### D1 · Alternativas de interface (ADR-02)
 - **Onde está:** [02 · ADR-02](02-arquitetura.md#adr-02--interface-híbrida-pygame-só-no-labirinto-htmlcss-no-restante-sprint-0-2710)

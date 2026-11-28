@@ -39,6 +39,7 @@ capturas de tela) estão em [08 · Legendas das figuras](08-legendas-das-figuras
 | 12 | Rastreabilidade: objetivos → requisitos → entregas | fluxograma | [01](01-visao-e-requisitos.md#rastreabilidade-objetivos-do-tcc--requisitos--entregas) | 3.x Requisitos ou 5 Conclusão |
 | 13 | Alternativas de interface (ADR-02) | quadrantes | [02](02-arquitetura.md#adr-02--interface-híbrida-pygame-só-no-labirinto-htmlcss-no-restante-sprint-0-2710) | 4 Resultados (decisão de projeto) |
 | 14 | Visão em camadas | fluxograma | [02](02-arquitetura.md#visão-em-camadas) | 3.x Arquitetura |
+| 14a | Módulos da aplicação | blocos (SVG) | [arquivo](img/modulos-da-aplicacao.svg) | **Figura 1 do TCC** (fim da 3.1), no lugar do ciclo do Scrum |
 | 15 | Modelo de classes | classes | [02](02-arquitetura.md#modelo-de-classes-python) | 3.x Arquitetura |
 | 16 | Carregamento da página | sequência | [02](02-arquitetura.md#carregamento-da-página) | 3.x Arquitetura (WebAssembly) |
 | 17 | Jornada do aluno | fluxograma | [02](02-arquitetura.md#fluxo-de-uso-jornada-do-aluno) | 3.x Requisitos ou 4 Resultados |

@@ -77,7 +77,7 @@ aplicação.
   instalados). Confira a diagramação ao abrir.
 - **Páginas:** preencha as páginas da Lista de Figuras ("XX") e atualize o Sumário.
 - **Comentário do orientador na Figura 1:** "Remover esse diagrama e inserir dos módulos da
-  aplicação". Não fazia parte deste pedido.
+  aplicação". Não fazia parte deste pedido; foi feito em seguida, no [P13](P13-diagrama-de-modulos.md).
 
 ## Revisão da equipe
 - Aceito:
